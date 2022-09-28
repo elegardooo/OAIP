@@ -6,6 +6,7 @@ const float pi = 3.1415926535;
 int main()
 {
     int f = 1, zn = -1, gr; float rd, rdsum, cos, sin, ctg;
+    printf("Enter degree: ");
     scanf_s("%d", &gr);
     while (gr >= 180)
         gr = gr - 180;
@@ -18,7 +19,7 @@ int main()
     rdsum = rd;
     sin = rd;
     cos = 1;
-    for (int i = 0,n=2; i < 10; i++,n=n+2)
+    for (int i = 0,n=2; i < 6; i++,n=n+2)
     {
         rdsum = rdsum * rd;
         f = f * n;
@@ -27,10 +28,9 @@ int main()
         f = f * (n + 1);
         sin = sin + zn * rdsum / f;
         zn = zn * (-1);
-        printf("%f   %f;   ", cos, sin);
     }
     ctg = cos / sin;
-    printf("\n%f;  %f;  %f", ctg,cos,sin);
+    printf("The value of the ctg is: %f", ctg);
     return 0;
 }
 
