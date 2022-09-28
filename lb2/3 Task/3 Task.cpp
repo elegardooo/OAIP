@@ -2,16 +2,36 @@
 //
 
 #include <iostream>
-const float pi = 3.14;
+const float pi = 3.1415926535;
 int main()
 {
-    int f=1,gr; float rd, cos, sin;
+    int f = 1, zn = -1, gr; float rd, rdsum, cos, sin, ctg;
     scanf_s("%d", &gr);
-    rd = gr / 180 * pi;
-    for (int i = 0; i < 5; i++)
+    while (gr >= 180)
+        gr = gr - 180;
+    if (gr == 0)
     {
-        printf("%f ", pi);
+        printf("value is not defined");
+        return 0;
     }
+    rd = gr* pi/180;
+    rdsum = rd;
+    sin = rd;
+    cos = 1;
+    for (int i = 0,n=2; i < 10; i++,n=n+2)
+    {
+        rdsum = rdsum * rd;
+        f = f * n;
+        cos = cos + zn * rdsum / f;
+        rdsum = rdsum * rd;
+        f = f * (n + 1);
+        sin = sin + zn * rdsum / f;
+        zn = zn * (-1);
+        printf("%f   %f;   ", cos, sin);
+    }
+    ctg = cos / sin;
+    printf("\n%f;  %f;  %f", ctg,cos,sin);
+    return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
