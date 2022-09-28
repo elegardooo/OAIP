@@ -12,7 +12,7 @@ int main()
         gr = gr - 180;
     if (gr == 0)
     {
-        printf("value is not defined");
+        printf("Value is not defined");
         return 0;
     }
     rd = gr* pi/180;
