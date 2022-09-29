@@ -10,6 +10,11 @@ int main()
     float S;
     printf("Enter the sides of an equilateral triangle: ");
     scanf("%d, %d, %d", &a, &b, &c);
+    while (a < 0 || b < 0 || c < 0)
+    {
+        printf("Wrong input, Enter the sides of an equilateral triangle: ");
+        scanf("%d, %d, %d", &a, &b, &c);
+    }
     if (a == b && a == c)
     {
         S = a * a * sqrt(3) / 4;
