@@ -14,6 +14,11 @@ int main()
     printf("5. Economics\n");
     printf("Choose the discipline: ");
         scanf("%d", &input);
+        while (input < 1 || input >5)
+        {
+            printf("Wrong input, Choose the discipline: ");
+            scanf("%d", &input);
+        }
     switch (input)
     {
     case 1:         printf("Exam, Credit");

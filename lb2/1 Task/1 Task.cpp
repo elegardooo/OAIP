@@ -8,6 +8,11 @@ int main()
     int m;
     printf("Enter the m: ");
     scanf_s("%d", &m);
+    while (m < 11 || m>49)
+    {
+        printf("Wrong input, Enter the m: ");
+        scanf_s("%d", &m);
+    }
     if (m % 2 == 0)
         printf("Yes, you can");
     else
