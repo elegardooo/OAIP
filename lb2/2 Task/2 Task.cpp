@@ -11,13 +11,13 @@ int main()
     {
         v = b / (p2 + sh);
         b = b - v * p2;
-        printf("%f ", b);
+        printf("%f\n ", b);
         b = b - v * p1;
         if (b > 0.00001)
         {
             v = b / (p1 + sh);
             b = b - v * p1;
-            printf("%f ", b);
+            printf("%f\n ", b);
             b = b - v * p2;
         }
     }

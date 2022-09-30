@@ -8,7 +8,7 @@ int main()
     int m;
     printf("Enter the m: ");
     scanf_s("%d", &m);
-    while (m < 11 || m>49)
+    while (m < 11 || m>49  )
     {
         printf("Wrong input, Enter the m: ");
         scanf_s("%d", &m);
