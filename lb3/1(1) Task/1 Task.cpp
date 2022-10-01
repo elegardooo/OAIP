@@ -4,7 +4,7 @@
 
 int main()
 {
-	int a[100], n,choose;
+	int a[100], n, choose;
 	printf("Enter the size of array: ");
 	scanf_s("%d", &n);
 	printf("1.User filling\n2.Random filling");
@@ -17,7 +17,7 @@ int main()
 	}
 	switch (choose)
 	{
-	case 1: 
+	case 1:
 		for (int i = 0; i < n; i++)
 		{
 			printf("%d elemt of array: ", (i + 1);
