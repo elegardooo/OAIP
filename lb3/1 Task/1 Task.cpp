@@ -2,16 +2,24 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctime>
 
 int main()
 {
-	int a[100], n, choose;
+	int a[100], sum=0, n, choose, number, max;
 	printf("Enter the size of array: ");
 	scanf_s("%d", &n);
-	printf("1.User filling\n2.Random filling");
+	srand(time(NULL));
+	while (n < 1 || n>100)
+	{
+		printf("Wrong input.\nEnter the size of array: ");
+		scanf_s("%d", &n);
+	}
+	printf("1.User filling\n2.Random filling\n");
 	printf("Choose the type of array filling: ");
 	scanf_s("%d", &choose);
-	while (choose != 1 || choose != 2)
+	while (choose != 1 && choose != 2)
 	{
 		printf("Wrong input.\nChoose the type of array filling: ");
 		scanf_s("%d", &choose);
@@ -21,13 +29,40 @@ int main()
 	case 1:
 		for (int i = 0; i < n; i++)
 		{
-			printf("%d elemt of array: ", (i + 1);
+			printf("Element number %d: ", (i + 1));
 			scanf_s("%d", &a[i]);
 		}
 		break;
+	case 2:
+		for (int i = 0; i < n; i++)
+		{
+			a[i] = rand()%61-30;
+			printf("Element number %d: %d\n", (i + 1),a[i]);
+		}
+		break;
 	}
+	printf("Array: ");
 	for (int i = 0; i < n; i++)
 		printf("%d ", a[i]);
+	max = a[0];
+	number = 1;
+	for (int i=1;i<n; i++)
+		if (abs(a[i])>abs(max))
+		{
+			max = a[i];
+			number = i+1;
+		}
+	for (int i = 0; i < n; i++)
+		if (a[i] > 0)
+		{
+			while (i < n)
+			{
+				sum = sum + a[i];
+				i++;
+			}
+			break;
+		}
+	printf("\nNumber of the maximum modulo element of the array is: %d\nThe sum of the array elements after the first positive element: %d",number,sum);
 	return 0;
 }
 
