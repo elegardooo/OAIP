@@ -69,7 +69,7 @@ int main()
 	}
 	if (n % k == 0)
 		n--;
-	printf("Changed array: ");
+	printf("\nChanged array: ");
 	for (int i = 0; i < n; i++)
 		printf("%d ", a[i]);
 	return 0;
