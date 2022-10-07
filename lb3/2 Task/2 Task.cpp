@@ -7,7 +7,7 @@
 
 int main()
 {
-    int a[100], n, k, choose;
+    int a[100], n, k, choose, gr, zn;
 	printf("Enter the size of array: ");
 	scanf_s("%d", &n);
 	printf("Enter k: ");
@@ -51,14 +51,19 @@ int main()
 	printf("Array: ");
 	for (int i = 0; i < n; i++)
 		printf("%d ", a[i]);
-	for (int i = k; i < n, i++)
+	for (int i = k; i < n;)
 	{
-		for (i; i < i + k - 1; i++)
+		zn = i;
+		while(i < n)
 		{
-			a[i] = a[i + 1];
+			a[i-1] = a[i];
+			i++;
 		}
+		i = zn + k-1;
 		n--;
 	}
+	if (n % k == 0)
+		n--;
 	printf("Changed array: ");
 	for (int i = 0; i < n; i++)
 		printf("%d ", a[i]);
