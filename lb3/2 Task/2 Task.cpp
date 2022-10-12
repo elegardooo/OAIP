@@ -43,7 +43,7 @@ int main()
 	case 2:
 		for (int i = 0; i < n; i++)
 		{
-			a[i] = rand() % 61 - 30;
+			a[i] = rand() % 201 - 100;
 			printf("Element number %d: %d\n", (i + 1), a[i]);
 		}
 		break;
