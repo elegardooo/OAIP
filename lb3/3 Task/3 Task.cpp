@@ -7,7 +7,7 @@
 
 int main()
 {
-	int a[100], b[100], c[100], choose, n = 3, zn=0;
+	int a[100], b[100], c[100], choose, n = 30, zn=0;
 	srand(time(NULL));
 	printf("1.User filling\n2.Random filling\n");
 	printf("Choose the type of array filling: ");
@@ -71,7 +71,7 @@ int main()
 	}
 	if (zn == 0)
 	{
-		for (int i = n - 1; i > 0; i--)
+		for (int i = n ; i > 0; i--)
 		{
 			c[i] = c[i] + a[i] - b[i];
 			if (c[i] < 0)
@@ -81,10 +81,11 @@ int main()
 			}
 		}
 		c[0] = c[0] + a[0] - b[0];
+		c[n - 1]++;
 	}
 	else
 	{
-		for (int i = n - 1; i > 0; i--)
+		for (int i = n ; i > 0; i--)
 		{
 			c[i] = c[i] + b[i] - a[i];
 			if (c[i] < 0)
@@ -94,6 +95,7 @@ int main()
 			}
 		}
 		c[0] = (c[0] + b[0] - a[0])*(-1);
+		c[n-1]++;
 	}
 	printf("\nEqual: ");
 		for (int i = 0; i < n; i++)

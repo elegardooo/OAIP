@@ -10,6 +10,11 @@ int main()
     int a[100], n, k, choose, gr, zn;
 	printf("Enter the size of array: ");
 	scanf_s("%d", &n);
+	while (n < 1 || n>100)
+	{
+		printf("Wrong input.\nEnter the size of array: ");
+		scanf_s("%d", &n);
+	}
 	printf("Enter k: ");
 	scanf_s("%d", &k);
 	while (k<1 || k>n)
