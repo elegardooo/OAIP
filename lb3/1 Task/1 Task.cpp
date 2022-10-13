@@ -7,7 +7,7 @@
 
 int main()
 {
-	int a[100], sum=0, n, choose, number, max;
+	int a[100], m[100], sum=0, n, choose, number, max, modulemax;
 	printf("Enter the size of array: ");
 	//scanf_s("%d", &n);
 	srand(time(NULL));
@@ -52,13 +52,21 @@ int main()
 	for (int i = 0; i < n; i++)
 		printf("%d ", a[i]);
 	max = a[0];
+	if (max < 0)
+		max = max * (-1);
 	number = 1;
-	for (int i=1;i<n; i++)
-		if (abs(a[i])>abs(max))
+	for (int i = 1; i < n; i++)
+	{
+		if (a[i] < 0)
+			m[i] = a[i] * (-1);
+		else
+			m[i] = a[i];
+		if (m[i] > max)
 		{
-			max = a[i];
-			number = i+1;
+		max = m[i];
+		number = i + 1;
 		}
+	}
 	for (int i = 0; i < n; i++)
 		if (a[i] > 0)
 		{
