@@ -9,6 +9,7 @@ int main()
 {
 	int a[100], b[100], c[100], choose, n = 30, zn=0;
 	srand(time(NULL));
+	zn = 0;
 	printf("1.User filling\n2.Random filling\n");
 	printf("Choose the type of array filling: ");
 	scanf_s("%d", &choose);
@@ -68,6 +69,7 @@ int main()
 		zn = 1;
 		break;
 		}
+		break;
 	}
 	if (zn == 0)
 	{
@@ -77,7 +79,7 @@ int main()
 			if (c[i] < 0)
 			{
 				c[i] = c[i] + 10;
-				c[i - 1]--;
+				c[i - 1] = -1;;
 			}
 		}
 		c[0] = c[0] + a[0] - b[0];
@@ -91,7 +93,7 @@ int main()
 			if (c[i] < 0)
 			{
 				c[i] = c[i] + 10;
-				c[i - 1]--;
+				c[i - 1] = -1;;
 			}
 		}
 		c[0] = (c[0] + b[0] - a[0])*(-1);
