@@ -10,7 +10,7 @@ int main()
     int a[100], n, k, choose, gr, zn;
 	printf("Enter the size of array: ");
 	//scanf_s("%d", &n);
-	while ((scanf_s("%d", &n)!=1) || (n < 1 || n>100))
+	while ((scanf_s("%d", &n)!=1) || (n < 1 || n>100)|| (getchar() != '\n'))
 	{
 		printf("Wrong input.\nEnter the size of array: ");
 		while (getchar() != '\n');
@@ -18,22 +18,23 @@ int main()
 	}
 	printf("Enter k: ");
 	//scanf_s("%d", &k);
-	while ((scanf_s("%d", &k)!=1) || (k < 1 || k > n))
+	while ((scanf_s("%d", &k)!=1) || (k < 1 || k > n)|| (getchar() != '\n'))
 	{
 		printf("Wrong input. \nEnter k: ");
 		while (getchar() != '\n');
 		//scanf_s("%d", &k);
 	}
 	srand(time(NULL));
-	while (n < 1 || n>100)
+	/*while (n < 1 || n>100)
 	{
 		printf("Wrong input.\nEnter the size of array: ");
 		scanf_s("%d", &n);
 	}
+	*/
 	printf("1.User filling\n2.Random filling\n");
 	printf("Choose the type of array filling: ");
 	scanf_s("%d", &choose);
-	while ((scanf_s("%d", &choose) == 0) || (choose != 1 && choose != 2))
+	while ((scanf_s("%d", &choose) !=1) || (choose != 1 && choose != 2) || (getchar() != '\n'))
 	{
 		printf("Wrong input.\nChoose the type of array filling: ");
 		while (getchar() != '\n');
@@ -45,7 +46,7 @@ int main()
 		for (int i = 0; i < n; i++)
 		{
 			printf("Element number %d: ", (i + 1));
-			while (scanf_s("%d", &a[i]) == 0)
+			while ((scanf_s("%d", &a[i]) !=1) || (getchar() != '\n'))
 			{
 				printf("Wrong input.\nElement number %d: ", (i + 1));
 				while (getchar() != '\n');
