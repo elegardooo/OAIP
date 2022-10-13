@@ -12,33 +12,48 @@ int main()
 	zn = 0;
 	printf("1.User filling\n2.Random filling\n");
 	printf("Choose the type of array filling: ");
-	scanf_s("%d", &choose);
-	while (choose != 1 && choose != 2)
+	//scanf_s("%d", &choose);
+	while ((scanf_s("%d", &choose)!=1) || (choose != 1 && choose != 2))
 	{
 		printf("Wrong input.\nChoose the type of array filling: ");
-		scanf_s("%d", &choose);
+		while (getchar() != '\n');
+		//scanf_s("%d", &choose);
 	}
 	switch (choose)
 	{
 	case 1:
-		for (int i = 0; i < n; i++)
+		printf("1 array element number 1: ");
+		while ((scanf_s("%d", &a[0]) != 1)||(a[0]<1 || a[0]>9))
+		{
+			printf("Wrong input.\n1 array element number 1: ");
+			while (getchar() != '\n');
+		}
+		for (int i = 1; i < n; i++)
 		{
 			printf("1 array element number %d: ", (i + 1));
-			scanf_s("%d", &a[i]);
-			while (a[i] < 0 || a[i]>9)
+			//scanf_s("%d", &a[i]);
+			while ((scanf_s("%d", &a[i])!=1)||(a[i] < 0 || a[i]>9))
 			{
 				printf("Wrong input.\n1 array element number %d: ", (i + 1));
-				scanf_s("%d", &a[i]);
+				while (getchar() != '\n');
+				//scanf_s("%d", &a[i]);
 			}
 		}
-		for (int i =0; i<n; i++)
+		printf("2 array element number 1: ");
+		while ((scanf_s("%d", &b[0]) != 1) || (b[0] < 1 || b[0]>9))
+		{
+			printf("Wrong input.\n2 array element number 1: ");
+			while (getchar() != '\n');
+		}
+		for (int i =1; i<n; i++)
 		{
 			printf("2 array element number %d: ", (i + 1));
-			scanf_s("%d", &b[i]);
-			while (b[i] < 0 || b[i]>9)
+			//scanf_s("%d", &b[i]);
+			while ((scanf_s("%d",&b[i])!=1)||(b[i] < 0 || b[i]>9))
 			{
 				printf("Wrong input.\n2 array element number %d: ", (i + 1));
-				scanf_s("%d", &b[i]);
+				while (getchar() != '\n');
+				//scanf_s("%d", &b[i]);
 			}
 		}
 		break;
