@@ -5,9 +5,16 @@
 #include <stdlib.h>
 #include <ctime>
 
+int my_abs(int a[],int i,int m[])
+{
+	if (a[i] < 0)
+		m[i] = a[i] * (-1);
+	return m[i];
+}
+
 int main()
 {
-	int a[100], m[100], sum=0, n, choose, number, max, modulemax;
+	int a[100], m[100], sum=0, n, choose, number, max;
 	printf("Enter the size of array: ");
 	//scanf_s("%d", &n);
 	srand(time(NULL));
@@ -57,10 +64,8 @@ int main()
 	number = 1;
 	for (int i = 1; i < n; i++)
 	{
-		if (a[i] < 0)
-			m[i] = a[i] * (-1);
-		else
-			m[i] = a[i];
+		m[i] = a[i];
+		my_abs(a,i,m);
 		if (m[i] > max)
 		{
 		max = m[i];
