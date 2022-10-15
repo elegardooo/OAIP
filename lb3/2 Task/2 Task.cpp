@@ -33,7 +33,7 @@ int main()
 	*/
 	printf("1.User filling\n2.Random filling\n");
 	printf("Choose the type of array filling: ");
-	scanf_s("%d", &choose);
+	//scanf_s("%d", &choose);
 	while ((scanf_s("%d", &choose) !=1) || (choose != 1 && choose != 2) || (getchar() != '\n'))
 	{
 		printf("Wrong input.\nChoose the type of array filling: ");

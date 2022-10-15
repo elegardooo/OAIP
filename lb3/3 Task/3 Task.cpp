@@ -79,12 +79,13 @@ int main()
 		c[i] = 0;
 	for (int i = 0; i < n; i++)
 	{
-		if (a[i] < b[i] && a[i]!=b[i])
+		if (a[i] < b[i] && a[i] != b[i])
 		{
-		zn = 1;
-		break;
+			zn = 1;
+			break;
 		}
-		break;
+		if (a[i] > b[i])
+			break;
 	}
 	if (zn == 0)
 	{
@@ -111,7 +112,9 @@ int main()
 				c[i - 1] = -1;;
 			}
 		}
-		c[0] = (c[0] + b[0] - a[0])*(-1);
+		c[0] = (c[0] + b[0] - a[0]);
+		if (c[0] > 0)
+			c[0] = c[0] * (-1);
 		c[n-1]++;
 	}
 	printf("\nEqual: ");
