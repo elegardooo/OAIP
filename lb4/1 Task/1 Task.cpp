@@ -20,21 +20,57 @@ void manual_input(int a[][100], int col, int row)
         }
     }
 }
-/*int output(int a[], int col, int row)
+
+void output_array(int a[][100], int col, int row)
 {
-    printf("Array: ");
+    printf("Array:\n");
     for (int i = 0; i < col; i++)
     {
-        for (int j = 0; j < row; i++)
-            printf("%d", a[i][j]);
+        for (int j = 0; j < row; j++)
+        {
+            printf("%d ", a[i][j]);
+        }
         printf("\n");
     }
-    return(0);
-}*/
+}
 
+void rand(int a[][100], int col, int row)
+{
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            a[i][j] = rand() % 201 - 100;
+        }
+    }
+}
+
+void charact(int a[][100], int sum[], int col, int row)
+{
+    for (int i = 0; i < col; i++)
+    {
+        sum[i] = 0;
+        for (int j = 0; j < row; j++)
+        {
+            if ((a[i][j] % 2 == 0) && (a[i][j] > 0))
+                sum[i] = sum[i] + a[i][j];
+        }
+    }
+}
+
+void output_charact(int sum[], int col, int row)
+{
+    printf("Charact array:\n");
+    for (int i = 0; i < col; i++)
+    {
+        printf("%d ", sum[i]);
+        printf("\n");
+    }
+}
 void main(void)
 {
-    int a[100][100], col, row;
+    int a[100][100], sum[100], col, row, choose;
+    srand(time(NULL));
     printf("Enter amount of columns in the array: ");
     while ((scanf_s("%d", &col) != 1) || (getchar() != '\n'))
     {
@@ -47,8 +83,25 @@ void main(void)
         printf("Wrong input. Enter amount of rows in the array: ");
         while (getchar() != '\n');
     }
-    manual_input(a, col, row);
-    //output(a, col, row);
+    printf("1.User filling\n2.Random filling\n");
+    printf("Choose the type of array filling: ");
+    while ((scanf_s("%d", &choose) != 1) || (choose != 1 && choose != 2) || (getchar() != '\n'))
+    {
+        printf("Wrong input.\nChoose the type of array filling: ");
+        while (getchar() != '\n');
+    }
+    switch (choose)
+    {
+    case 1:
+        manual_input(a, col, row);
+        break;
+    case 2:
+        rand(a, col, row);
+        break;
+    }
+    charact(a, sum, col, row);
+    output_array(a, col, row);
+    output_charact(sum, col, row);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
