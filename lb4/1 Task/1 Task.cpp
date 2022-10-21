@@ -69,7 +69,7 @@ void output_charact(int sum[], int col, int row)
 }
 void main(void)
 {
-    int a[100][100], sum[100], col, row, choose;
+    int a[100][100], sum[100], sort, col, row, choose, p;
     srand(time(NULL));
     printf("Enter amount of columns in the array: ");
     while ((scanf_s("%d", &col) != 1) || (getchar() != '\n'))
@@ -102,6 +102,27 @@ void main(void)
     charact(a, sum, col, row);
     output_array(a, col, row);
     output_charact(sum, col, row);
+    do
+    {
+        sort = 0;
+        for (int i = 0; i < col-1; i++)
+        {
+            if (sum[i] > sum[i + 1])
+            {
+                for (int j = 0; j < row; j++)
+                {
+                    p = a[i][j];
+                    a[i][j] = a[i + 1][j];
+                    a[i + 1][j] = p;
+                }
+                sort = 1;
+                p = sum[i];
+                sum[i] = sum[i + 1];
+                sum[i + 1] = p;
+            }
+        }
+    } while (sort != 0);
+        output_array(a, col, row);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
