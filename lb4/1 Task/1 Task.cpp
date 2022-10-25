@@ -67,6 +67,7 @@ void output_charact(int sum[], int col, int row)
         printf("\n");
     }
 }
+
 void main(void)
 {
     int a[100][100], sum[100], sort, col, row, choose, p;
