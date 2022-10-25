@@ -5,9 +5,108 @@
 #include <stdlib.h>
 #include <ctime>
 
+void manual_input(int a[][100], int col, int row)
+{
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            printf("Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
+            while ((scanf_s("%d", &a[i][j]) != 1) || (getchar() != '\n'))
+            {
+                printf("Wrong input. Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
+                while (getchar() != '\n');
+            }
+        }
+    }
+}
+
+void output_array(int a[][100], int col, int row)
+{
+    printf("Array:\n");
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void rand(int a[][100], int col, int row)
+{
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            a[i][j] = rand() % 201 - 100;
+        }
+    }
+}
+
+int check(int a[][100], int col, int row, int& number)
+{
+    number = 0;
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            if (a[i][j] < 0)
+            {
+                number = a[i][j];
+                int numberi = i;
+                int numberj = j;
+                printf("Number position: [%d][%d]\n", (numberi + 1), (numberj + 1));
+                for (int i = 0; i < col; i++)
+                {
+                    a[i][j] = a[i][j] / 2;
+                }
+                goto label;
+            }
+        }
+    }
+label:;
+    return number;
+}
 void main(void)
 {
-    
+    int a[100][100], col, row, choose, number;
+    srand(time(NULL));
+    printf("Enter amount of columns in the array: ");
+    while ((scanf_s("%d", &col) != 1) || (getchar() != '\n'))
+    {
+        printf("Wrong input. Enter amount of columns in the array: ");
+        while (getchar() != '\n');
+    }
+    printf("Enter amount of rows in the array: ");
+    while ((scanf_s("%d", &row) != 1) || (getchar() != '\n'))
+    {
+        printf("Wrong input. Enter amount of rows in the array: ");
+        while (getchar() != '\n');
+    }
+    printf("1.User filling\n2.Random filling\n");
+    printf("Choose the type of array filling: ");
+    while ((scanf_s("%d", &choose) != 1) || (choose != 1 && choose != 2) || (getchar() != '\n'))
+    {
+        printf("Wrong input.\nChoose the type of array filling: ");
+        while (getchar() != '\n');
+    }
+    switch (choose)
+    {
+    case 1:
+        manual_input(a, col, row);
+        break;
+    case 2:
+        rand(a, col, row);
+        break;
+    }
+    output_array(a, col, row);
+    check(a, col, row, number);
+    if (number == 0)
+        printf("There is no negative element.");
+    else
+    output_array(a, col, row);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
