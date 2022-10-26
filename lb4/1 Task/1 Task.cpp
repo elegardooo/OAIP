@@ -23,7 +23,6 @@ void manual_input(int a[][100], int col, int row)
 
 void output_array(int a[][100], int col, int row)
 {
-    printf("Array:\n");
     for (int i = 0; i < col; i++)
     {
         for (int j = 0; j < row; j++)
@@ -100,9 +99,10 @@ void main(void)
         rand(a, col, row);
         break;
     }
-    charact(a, sum, col, row);
+    printf("Array:\n");
     output_array(a, col, row);
-    output_charact(sum, col, row);
+    charact(a, sum, col, row);
+    //output_charact(sum, col, row);
     do
     {
         sort = 0;
@@ -123,7 +123,8 @@ void main(void)
             }
         }
     } while (sort != 0);
-        output_array(a, col, row);
+    printf("Changed array:\n");
+    output_array(a, col, row);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

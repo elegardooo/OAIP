@@ -44,7 +44,7 @@ void rand(int a[][100], int col, int row)
     }
 }
 
-int check(int a[][100], int col, int row, int& number)
+void check(int a[][100], int col, int row, int& number)
 {
     number = 0;
     for (int i = 0; i < col; i++)
@@ -66,7 +66,6 @@ int check(int a[][100], int col, int row, int& number)
         }
     }
 label:;
-    return number;
 }
 void main(void)
 {
@@ -107,8 +106,8 @@ void main(void)
         printf("There is no negative element.");
     else
     {
-    output_array(a, col, row);
     printf("Changed array:\n");
+    output_array(a, col, row);
     }
 }
 
