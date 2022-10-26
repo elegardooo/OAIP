@@ -1,15 +1,15 @@
-﻿// 1 Task.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+﻿// 3 Task.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctime>
 
-void manual_input(int a[][100], int col, int row)
+void manual_input(int a[][100], int n)
 {
-    for (int i = 0; i < col; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < row; j++)
+        for (int j = 0; j < n; j++)
         {
             printf("Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
             while ((scanf_s("%d", &a[i][j]) != 1) || (getchar() != '\n'))
@@ -21,12 +21,11 @@ void manual_input(int a[][100], int col, int row)
     }
 }
 
-void output_array(int a[][100], int col, int row)
+void output_array(int a[][100], int n)
 {
-    printf("Array:\n");
-    for (int i = 0; i < col; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < row; j++)
+        for (int j = 0; j < n; j++)
         {
             printf("%d ", a[i][j]);
         }
@@ -34,54 +33,32 @@ void output_array(int a[][100], int col, int row)
     }
 }
 
-void rand(int a[][100], int col, int row)
+void rand(int a[][100], int n)
 {
-    for (int i = 0; i < col; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < row; j++)
+        for (int j = 0; j < n; j++)
         {
             a[i][j] = rand() % 201 - 100;
         }
     }
 }
 
-void charact(int a[][100], int sum[], int col, int row)
+void find_min(int a[][100], int n, int &minimal)
 {
-    for (int i = 0; i < col; i++)
-    {
-        sum[i] = 0;
-        for (int j = 0; j < row; j++)
-        {
-            if ((a[i][j] % 2 == 0) && (a[i][j] > 0))
-                sum[i] = sum[i] + a[i][j];
-        }
-    }
-}
-
-void output_charact(int sum[], int col, int row)
-{
-    printf("Charact array:\n");
-    for (int i = 0; i < col; i++)
-    {
-        printf("%d ", sum[i]);
-        printf("\n");
-    }
+    int ihalf;
+    if (col%2==0)
+    for(int i=0; i<ihalf)
 }
 
 void main(void)
 {
-    int a[100][100], sum[100], sort, col, row, choose, p;
+    int a[100][100], n, choose, minimal;
     srand(time(NULL));
-    printf("Enter amount of columns in the array: ");
-    while ((scanf_s("%d", &col) != 1) || (col < 1 || col > 100) || (getchar() != '\n'))
+    printf("Enter the N: ");
+    while ((scanf_s("%d", &n) != 1) || (getchar() != '\n'))
     {
-        printf("Wrong input. Enter amount of columns in the array: ");
-        while (getchar() != '\n');
-    }
-    printf("Enter amount of rows in the array: ");
-    while ((scanf_s("%d", &row) != 1) || (row < 1 || row > 100) || (getchar() != '\n'))
-    {
-        printf("Wrong input. Enter amount of rows in the array: ");
+        printf("Wrong input. Enter the N: ");
         while (getchar() != '\n');
     }
     printf("1.User filling\n2.Random filling\n");
@@ -94,38 +71,15 @@ void main(void)
     switch (choose)
     {
     case 1:
-        manual_input(a, col, row);
+        manual_input(a, n);
         break;
     case 2:
-        rand(a, col, row);
+        rand(a, n);
         break;
     }
-    charact(a, sum, col, row);
-    output_array(a, col, row);
-    output_charact(sum, col, row);
-    do
-    {
-        sort = 0;
-        for (int i = 0; i < col-1; i++)
-        {
-            if (sum[i] > sum[i + 1])
-            {
-                for (int j = 0; j < row; j++)
-                {
-                    p = a[i][j];
-                    a[i][j] = a[i + 1][j];
-                    a[i + 1][j] = p;
-                }
-                sort = 1;
-                p = sum[i];
-                sum[i] = sum[i + 1];
-                sum[i + 1] = p;
-            }
-        }
-    } while (sort != 0);
-        output_array(a, col, row);
+    printf("Array:\n");
+    output_array(a, n);
 }
-
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
 

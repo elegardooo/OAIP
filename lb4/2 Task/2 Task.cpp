@@ -23,7 +23,6 @@ void manual_input(int a[][100], int col, int row)
 
 void output_array(int a[][100], int col, int row)
 {
-    printf("Array:\n");
     for (int i = 0; i < col; i++)
     {
         for (int j = 0; j < row; j++)
@@ -74,13 +73,13 @@ void main(void)
     int a[100][100], col, row, choose, number;
     srand(time(NULL));
     printf("Enter amount of columns in the array: ");
-    while ((scanf_s("%d", &col) != 1) || (getchar() != '\n'))
+    while ((scanf_s("%d", &col) != 1) || (col < 1 || col > 100) || (getchar() != '\n'))
     {
         printf("Wrong input. Enter amount of columns in the array: ");
         while (getchar() != '\n');
     }
     printf("Enter amount of rows in the array: ");
-    while ((scanf_s("%d", &row) != 1) || (getchar() != '\n'))
+    while ((scanf_s("%d", &row) != 1) || (row < 1 || row > 100) || (getchar() != '\n'))
     {
         printf("Wrong input. Enter amount of rows in the array: ");
         while (getchar() != '\n');
@@ -101,12 +100,16 @@ void main(void)
         rand(a, col, row);
         break;
     }
+    printf("Array:\n");
     output_array(a, col, row);
     check(a, col, row, number);
     if (number == 0)
         printf("There is no negative element.");
     else
+    {
     output_array(a, col, row);
+    printf("Changed array:\n");
+    }
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
