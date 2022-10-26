@@ -44,19 +44,33 @@ void rand(int a[][100], int n)
     }
 }
 
-void find_min(int a[][100], int n, int &minimal)
+void find_min(int a[][100], int n, int& min)
 {
-    int ihalf;
-    if (col%2==0)
-    for(int i=0; i<ihalf)
+    int ihalf, zn = 0;
+    min = a[0][n-1];
+    if (n % 2 == 0)
+        ihalf = n / 2;
+    if (n % 2 != 0)
+        ihalf = n / 2 + 1;
+    for (int j = n-1; j >= ihalf; j--)
+    {
+        for (int i = zn; i <= ihalf; i++)
+        {
+            if (min > a[i][j])
+                min = a[i][j];
+            if (min > a[(n-1) - i][j])
+                min = a[(n-1) - i][j];
+            zn++;
+        }
+    }
 }
 
 void main(void)
 {
-    int a[100][100], n, choose, minimal;
+    int a[100][100], n, choose, min;
     srand(time(NULL));
     printf("Enter the N: ");
-    while ((scanf_s("%d", &n) != 1) || (getchar() != '\n'))
+    while ((scanf_s("%d", &n) != 1) || (n<1 || n>100) || (getchar() != '\n'))
     {
         printf("Wrong input. Enter the N: ");
         while (getchar() != '\n');
@@ -79,6 +93,8 @@ void main(void)
     }
     printf("Array:\n");
     output_array(a, n);
+    find_min(a, n, min);
+    printf("Minimal element in the 2 area is: %d", min);
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
