@@ -60,8 +60,8 @@ void find_min(int a[][100], int n, int& min)
                 min = a[i][j];
             if (min > a[(n-1) - i][j])
                 min = a[(n-1) - i][j];
-            zn++;
         }
+        zn++;
     }
 }
 
