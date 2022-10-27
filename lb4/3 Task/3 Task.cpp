@@ -52,9 +52,9 @@ void find_min(int a[][100], int n, int& min)
         ihalf = n / 2;
     if (n % 2 != 0)
         ihalf = n / 2 + 1;
-    for (int j = n-1; j >= ihalf; j--)
+    for (int j = n-1; j >= ihalf-1; j--)
     {
-        for (int i = zn; i <= ihalf; i++)
+        for (int i = zn; i < ihalf; i++)
         {
             if (min > a[i][j])
                 min = a[i][j];
