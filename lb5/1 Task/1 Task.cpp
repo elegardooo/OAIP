@@ -6,7 +6,7 @@
 
 int* memory_alloc(int n)
 {
-	int* temp = (int*)calloc(n, sizeof(int));
+	int* temp = (int*)calloc(n*2, sizeof(int));
 	return temp;
 }
 
@@ -18,23 +18,13 @@ void output_array(int* mas, int n)
 	}
 }
 
-void array_change(int* mas, int& n)
+void array_change(int* mas, int& n) 
 {
-	int per, p;
-	per = 0;
-	for (int i = (n * 2)-1; i > per;)
-	{
-		n++;
-		mas = (int*)realloc(mas, n * sizeof(int));
-		for (int i = n - 2; i > per; i--)
-		{
-			mas[i + 1] = mas[i];
-		}
-		mas[per + 1] = mas[per] * mas[per];
-		per = per + 2;
-		i = n;
+	for (int i = n - 1; i >= 0; i--) {
+		mas[i * 2 + 1] = mas[i] * mas[i];
+		mas[i * 2] = mas[i];
 	}
-
+	n = n * 2;
 }
 
 void main(void)
