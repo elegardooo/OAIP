@@ -12,7 +12,6 @@ int* memory_alloc(int n)
 
 void output_array(int* mas, int n)
 {
-	printf("Array: ");
 	for (int i = 0; i < n; i++)
 	{
 		printf("%d ", *(mas + i));
@@ -21,10 +20,9 @@ void output_array(int* mas, int n)
 
 void array_change(int* mas, int& n)
 {
-	int per;
+	int per, p;
 	per = 0;
-	//mas = (int*)realloc(mas, n * sizeof(int));
-	for (int i = (n * 2); i > per;)
+	for (int i = (n * 2)-1; i > per;)
 	{
 		n++;
 		mas = (int*)realloc(mas, n * sizeof(int));
@@ -34,6 +32,7 @@ void array_change(int* mas, int& n)
 		}
 		mas[per + 1] = mas[per] * mas[per];
 		per = per + 2;
+		i = n;
 	}
 
 }
@@ -57,8 +56,10 @@ void main(void)
 			while (getchar() != '\n');
 		}
 	}
+	printf("Array: ");
 	output_array(mas, n);
 	array_change(mas, n);
+	printf("\nChanged array: ");
 	output_array(mas, n);
 }
 
