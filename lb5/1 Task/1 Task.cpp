@@ -22,13 +22,13 @@ void output_array(int* mas, int n)
 void array_change(int* mas, int& n)
 {
 	int per;
-	per = 1;
-	realloc(mas, sizeof(int) * (n));
-	for (int i = n * 2; i > per;)
+	per = 0;
+	//mas = (int*)realloc(mas, n * sizeof(int));
+	for (int i = (n * 2); i > per;)
 	{
 		n++;
-		realloc(mas, sizeof(int) * (n));
-		for (int i = n - 1; i > per; i--)
+		mas = (int*)realloc(mas, n * sizeof(int));
+		for (int i = n - 2; i > per; i--)
 		{
 			mas[i + 1] = mas[i];
 		}
