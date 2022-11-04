@@ -19,6 +19,25 @@ void output_array(int* mas, int n)
 	}
 }
 
+void array_change(int* mas, int& n)
+{
+	int per;
+	per = 1;
+	realloc(mas, sizeof(int) * (n));
+	for (int i = n * 2; i > per;)
+	{
+		n++;
+		realloc(mas, sizeof(int) * (n));
+		for (int i = n - 1; i > per; i--)
+		{
+			mas[i + 1] = mas[i];
+		}
+		mas[per + 1] = mas[per] * mas[per];
+		per = per + 2;
+	}
+
+}
+
 void main(void)
 {
 	int *mas, n;
@@ -38,6 +57,8 @@ void main(void)
 			while (getchar() != '\n');
 		}
 	}
+	output_array(mas, n);
+	array_change(mas, n);
 	output_array(mas, n);
 }
 
