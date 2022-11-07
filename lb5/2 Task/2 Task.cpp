@@ -6,8 +6,8 @@
 
 void main(void)
 {
-    int col, row;
-    printf("Enter the number of ")
+    int row, col;
+    printf("Enter the number of rows: ");
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
