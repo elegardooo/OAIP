@@ -7,9 +7,9 @@
 
 void manual_input(int a[][100], int col, int row)
 {
-    for (int i = 0; i < col; i++)
+    for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < row; j++)
+        for (int j = 0; j < col; j++)
         {
             printf("Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
             while ((scanf_s("%d", &a[i][j]) != 1) || (getchar() != '\n'))
@@ -23,9 +23,9 @@ void manual_input(int a[][100], int col, int row)
 
 void output_array(int a[][100], int col, int row)
 {
-    for (int i = 0; i < col; i++)
+    for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < row; j++)
+        for (int j = 0; j < col; j++)
         {
             printf("%d ", a[i][j]);
         }
@@ -35,9 +35,9 @@ void output_array(int a[][100], int col, int row)
 
 void rand(int a[][100], int col, int row)
 {
-    for (int i = 0; i < col; i++)
+    for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < row; j++)
+        for (int j = 0; j < col; j++)
         {
             a[i][j] = rand() % 201 - 100;
         }
@@ -46,10 +46,10 @@ void rand(int a[][100], int col, int row)
 
 void charact(int a[][100], int sum[], int col, int row)
 {
-    for (int i = 0; i < col; i++)
+    for (int i = 0; i < row; i++)
     {
         sum[i] = 0;
-        for (int j = 0; j < row; j++)
+        for (int j = 0; j < col; j++)
         {
             if ((a[i][j] % 2 == 0) && (a[i][j] > 0))
                 sum[i] = sum[i] + a[i][j];
@@ -60,7 +60,7 @@ void charact(int a[][100], int sum[], int col, int row)
 void output_charact(int sum[], int col, int row)
 {
     printf("Charact array:\n");
-    for (int i = 0; i < col; i++)
+    for (int i = 0; i < row; i++)
     {
         printf("%d ", sum[i]);
         printf("\n");
