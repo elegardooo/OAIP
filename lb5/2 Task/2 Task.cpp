@@ -4,10 +4,64 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int** memory(int row, int col)
+{
+    int **mas;
+    mas = (int**)calloc(row, sizeof(int*));
+    for (int i = 0; i < row; i++)
+    {
+        mas[i] = (int*)calloc(col, sizeof(int));
+    }
+    return mas;
+}
+
+void output_array(int** mas, int row, int col)
+{
+    printf("Array: ");
+    for (int i = 0; i < row; i++)
+    {
+        printf("\n");
+        for (int j = 0; j < col-1; j++)
+        {
+            if ((mas[i][j]) == -1)
+                j = col;
+            else
+                printf("%d ", (mas[i][j]));
+        }
+    }
+}
+
 void main(void)
 {
-    int row, col;
+    int **mas, row, col;
     printf("Enter the number of rows: ");
+    while ((scanf_s("%d", &row)) != 1 || (getchar() != '\n'))
+    {
+        printf("Wrong input. Enter the number of rows: ");
+        while (getchar() != '\n');
+    }
+    printf("Enter the maximum number of elements in the row: ");
+    while ((scanf_s("%d", &col) != 1) || (getchar() != '\n'))
+    {
+        printf("Wrong input. Enther the maximum number of elements in the row: ");
+        while (getchar() != '\n');
+    }
+    mas = memory(row, col);
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            printf("Enter the positive [%d][%d] element of array: ", (i + 1), (j + 1));
+            while ((scanf_s("%d", &mas[i][j]) != 1) || (mas[i][j] < -1) || (mas[i][j] == 0) || (mas[i][0] == -1) || (getchar() != '\n'))
+            {
+                printf("Wrong input. Enter the positive [%d][%d] element of array: ", (i + 1), (j + 1));
+                while (getchar() != '\n');
+            }
+            if (mas[i][j] == -1)
+                j = col;
+        }
+    }
+    output_array(mas, row, col);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
