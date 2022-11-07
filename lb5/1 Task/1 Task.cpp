@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <arrays.h>
+#include "arrays.h"
 
 int* memory_alloc(int n)
 {
@@ -17,15 +17,6 @@ void output_array(int* mas, int n)
 	{
 		printf("%d ", *(mas + i));
 	}
-}
-
-void array_change(int* mas, int& n) 
-{
-	for (int i = n - 1; i >= 0; i--) {
-		mas[i * 2 + 1] = mas[i] * mas[i];
-		mas[i * 2] = mas[i];
-	}
-	n = n * 2;
 }
 
 void main(void)
