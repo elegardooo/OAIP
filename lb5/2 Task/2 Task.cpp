@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <arrays.h>
 
 int** memory(int row, int col)
 {
@@ -17,11 +18,10 @@ int** memory(int row, int col)
 
 void output_array(int** mas, int row, int col)
 {
-    printf("Array: ");
     for (int i = 0; i < row; i++)
     {
         printf("\n");
-        for (int j = 0; j < col-1; j++)
+        for (int j = 0; j < col; j++)
         {
             if ((mas[i][j]) == -1)
                 j = col;
@@ -33,7 +33,7 @@ void output_array(int** mas, int row, int col)
 
 void main(void)
 {
-    int **mas, row, col;
+    int **mas, row, col, k;
     printf("Enter the number of rows: ");
     while ((scanf_s("%d", &row)) != 1 || (getchar() != '\n'))
     {
@@ -44,6 +44,13 @@ void main(void)
     while ((scanf_s("%d", &col) != 1) || (getchar() != '\n'))
     {
         printf("Wrong input. Enther the maximum number of elements in the row: ");
+        while (getchar() != '\n');
+    }
+    printf("Enter the k: ");
+    while ((scanf_s("%d", &k)) != 1 || (k < 1) ||
+        (getchar() != '\n'))
+    {
+        printf("Wrong input. Enter the k: ");
         while (getchar() != '\n');
     }
     mas = memory(row, col);
@@ -61,6 +68,10 @@ void main(void)
                 j = col;
         }
     }
+    printf("Array: ");
+    output_array(mas, row, col);
+    array_change(mas, row, col, k);
+    printf("\nChanged array: ");
     output_array(mas, row, col);
 }
 
