@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <arrays.h>
+#include "arrays.h"
 
 int** memory(int row, int col)
 {
