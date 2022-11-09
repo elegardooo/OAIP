@@ -27,7 +27,7 @@ void output_array(int a[][100], int col, int row)
     {
         for (int j = 0; j < col; j++)
         {
-            printf("%d ", a[i][j]);
+            printf("%4d ", a[i][j]);
         }
         printf("\n");
     }
@@ -62,7 +62,7 @@ void output_charact(int sum[], int col, int row)
     printf("Charact array:\n");
     for (int i = 0; i < row; i++)
     {
-        printf("%d ", sum[i]);
+        printf("%4d ", sum[i]);
         printf("\n");
     }
 }

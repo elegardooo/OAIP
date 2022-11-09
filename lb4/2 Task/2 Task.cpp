@@ -27,7 +27,7 @@ void output_array(int a[][100], int col, int row)
     {
         for (int j = 0; j < col; j++)
         {
-            printf("%d ", a[i][j]);
+            printf("%4d ", a[i][j]);
         }
         printf("\n");
     }

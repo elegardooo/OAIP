@@ -5,76 +5,49 @@
 #include <stdlib.h>
 #include <ctime>
 
-void manual_input(int a[][100], int n)
+int** memory(int row, int col)
 {
-    for (int i = 0; i < n; i++)
+    int** mas;
+    mas = (int**)calloc(row, sizeof(int*));
+    for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            printf("Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
-            while ((scanf_s("%d", &a[i][j]) != 1) || (getchar() != '\n'))
-            {
-                printf("Wrong input. Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
-                while (getchar() != '\n');
-            }
-        }
+        mas[i] = (int*)calloc(col, sizeof(int));
     }
+    return mas;
 }
 
-void output_array(int a[][100], int n)
+void output_array(int** mas, int row, int col)
 {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            printf("%4d ", a[i][j]);
-        }
         printf("\n");
-    }
-}
-
-void rand(int a[][100], int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < col; j++)
         {
-            a[i][j] = rand() % 201 - 100;
+            if ((mas[i][j]) == -1)
+                j = col;
+            else
+                printf("%4d ", (mas[i][j]));
         }
-    }
-}
-
-void find_min(int a[][100], int n, int& min)
-{
-    int ihalf, zn = 0;
-    min = a[0][n-1];
-    if (n % 2 == 0)
-        ihalf = n / 2;
-    if (n % 2 != 0)
-        ihalf = n / 2 + 1;
-    for (int j = n-1; j >= ihalf-1; j--)
-    {
-        for (int i = zn; i < ihalf; i++)
-        {
-            if (min > a[i][j])
-                min = a[i][j];
-            if (min > a[(n-1) - i][j])
-                min = a[(n-1) - i][j];
-        }
-        zn++;
     }
 }
 
 void main(void)
 {
-    int a[100][100], n, choose, min;
+    int **mas, row, col, choose;
     srand(time(NULL));
-    printf("Enter the N: ");
-    while ((scanf_s("%d", &n) != 1) || (n<1 || n>100) || (getchar() != '\n'))
+    printf("Enter the number of rows: ");
+    while ((scanf_s("%d", &row)) != 1 || (getchar() != '\n'))
     {
-        printf("Wrong input. Enter the N: ");
+        printf("Wrong input. Enter the number of rows: ");
         while (getchar() != '\n');
     }
+    printf("Enter the number of columns: ");
+    while ((scanf_s("%d", &col)) != 1 || (getchar() != '\n'))
+    {
+        printf("Wrong input. Enter the number of columns: ");
+        while (getchar() != '\n');
+    }
+    mas = memory(row, col);
     printf("1.User filling\n2.Random filling\n");
     printf("Choose the type of array filling: ");
     while ((scanf_s("%d", &choose) != 1) || (choose != 1 && choose != 2) || (getchar() != '\n'))
@@ -85,17 +58,33 @@ void main(void)
     switch (choose)
     {
     case 1:
-        manual_input(a, n);
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                printf("Enter the positive [%d][%d] element of array: ", (i + 1), (j + 1));
+                while ((scanf_s("%d", &mas[i][j]) != 1) || (getchar() != '\n'))
+                {
+                    printf("Wrong input. Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
+                    while (getchar() != '\n');
+                }
+            }
+        }
         break;
     case 2:
-        rand(a, n);
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                mas[i][j] = rand() % 201 - 100;
+            }
+        }
         break;
     }
-    printf("Array:\n");
-    output_array(a, n);
-    find_min(a, n, min);
-    printf("Minimal element in the 2 area is: %d", min);
+    printf("Array: ");
+    output_array(mas, row, col);
 }
+
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
 
