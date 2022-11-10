@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctime>
+#include "arrays.h"
 
 int** memory(int row, int col)
 {
@@ -27,32 +28,6 @@ void output_array(int** mas, int row, int col)
                 j = col;
             else
                 printf("%4d ", (mas[i][j]));
-        }
-    }
-}
-
-void array_change(int** mas, int row, int& col)
-{
-    int p, zn;
-    for (int j = 0; j < col; j++)
-    {
-        p = 0;
-        for (int i = 0; i < row; i++)
-        {
-            if (mas[i][j] < 0)
-                p++;
-        }
-        if (p == row)
-        {
-            for (int i = 0; i < row; i++)
-            {
-                for (int c = j; c < col-1; c++)
-                {
-                    mas[i][c] = mas[i][c+1];
-                }
-            }
-            col--;
-            j--;
         }
     }
 }
