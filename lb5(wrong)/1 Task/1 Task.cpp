@@ -1,33 +1,10 @@
-﻿// 1 Task.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <stdio.h>
-#include <stdlib.h>
-#include "arrays.h"
-
-int* memory_alloc(int n)
-{
-	int* temp = (int*)calloc(n*2, sizeof(int));
-	return temp;
-}
-
-void output_array(int* mas, int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		printf("%d ", *(mas + i));
-	}
-}
+﻿#include "arrays.h"
 
 void main(void)
 {
 	int *mas, n;
 	printf("Enter the size of array: ");
-	while ((scanf_s("%d", &n) != 1) || (getchar() != '\n'))
-	{
-		printf("Wrong input. Enter the size of array: ");
-		while (getchar() != '\n');
-	}
+	input_n(n);
 	mas = memory_alloc(n);
 	for (int i = 0; i < n; i++)
 	{

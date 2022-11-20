@@ -102,7 +102,7 @@ void main(void)
     printf("Array:\n");
     output_array(a, col, row);
     charact(a, sum, col, row);
-    //output_charact(sum, col, row);
+    output_charact(sum, col, row);
     do
     {
         sort = 0;

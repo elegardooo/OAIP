@@ -63,7 +63,7 @@ void main(void)
         {
             for (int j = 0; j < col; j++)
             {
-                printf("Enter the positive [%d][%d] element of array: ", (i + 1), (j + 1));
+                printf("Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
                 while ((scanf_s("%d", &mas[i][j]) != 1) || (getchar() != '\n'))
                 {
                     printf("Wrong input. Enter the [%d][%d] element of array: ", (i + 1), (j + 1));
