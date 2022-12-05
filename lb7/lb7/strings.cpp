@@ -87,7 +87,7 @@ int str_str_compare(char* s, char* s0, int len0)
 
 void* task1(void)
 {
-	int n = 255, len0;
+	int n = 256, len0;
 	char* s = (char*)malloc(n * sizeof(char)), *s0 = (char*)malloc(n * sizeof(char));
 	printf("Enter the string:\n");
 	get_str(s, n);
@@ -111,7 +111,7 @@ void output(int ToF)
 
 void* task2(void)
 {
-	int n = 255, len, len0;
+	int n = 256, len, len0;
 	char* s = (char*)malloc(n * sizeof(char)), * s0 = (char*)malloc(n * sizeof(char));
 	printf("Enter the first string:\n");
 	get_str(s, n);
