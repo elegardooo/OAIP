@@ -21,7 +21,7 @@ char* get_str(char* s, int k)
 char* get_word(char* s, int k)
 {
 	int c, i = 0;
-	while (--k > 0 && (c = getchar()) != EOF && c != '\n' && c != ' ')
+	while (--k > 0 && (c = getchar()) != EOF && c != '\n' && c != ' ' && c != '\t')
 		s[i++] = c;		//Enter or Ctrl + Z
 	s[i] = '\0';
 	return s;
@@ -40,10 +40,10 @@ int str_word_compare(char* s, char* s0, int len0)
 	int count = 0, ilen = 0, k = 0;
 	for (int i = 0; s[i] != '\0'; i++)
 	{
-		if ((s[i] - s0[k] != 1) && (s[i] != ' '))
+		if ((s[i] - s0[k] != 1) && (s[i] != ' ') && (s[i]!='\t'))
 		{
 			ilen++;
-			if ((ilen == len0) && ((s[i + 1] == '\0') || (s[i + 1] == ' ')))
+			if ((ilen == len0) && ((s[i + 1] == '\0') || (s[i + 1] == ' ') || (s[i+1] == '\t')))
 			{
 				count++;
 				ilen = 0;
