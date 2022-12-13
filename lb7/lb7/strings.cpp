@@ -129,7 +129,7 @@ void choose_task(void)
 {
 	int task = 0;
 	void* (*function[2])(void) = { task1, task2 };
-	printf("Choose the task(1 or 2): ");
+	printf("Choose the task(1 or 2): "); 
 	input_nums(&task, 1, 2);
 	function[task - 1]();
 }
