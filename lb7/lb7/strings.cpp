@@ -40,10 +40,10 @@ int str_word_compare(char* s, char* s0, int len0)
 	int count = 0, ilen = 0, k = 0;
 	for (int i = 0; s[i] != '\0'; i++)
 	{
-		if ((s[i] - s0[k] != 1) && (s[i] != ' ') && (s[i]!='\t'))
+		if ((s[i] - s0[k] != 1) && (s[i] != ' ') && (s[i] != '\t'))
 		{
 			ilen++;
-			if ((ilen == len0) && ((s[i + 1] == '\0') || (s[i + 1] == ' ') || (s[i+1] == '\t')))
+			if ((ilen == len0) && ((s[i + 1] == '\0') || (s[i + 1] == ' ') || (s[i + 1] == '\t')))
 			{
 				count++;
 				ilen = 0;
@@ -127,18 +127,9 @@ void* task2(void)
 
 void choose_task(void)
 {
-	int task = 0, YoN = 0;
+	int task = 0;
+	void* (*function[2])(void) = { task1, task2 };
 	printf("Choose the task(1 or 2): ");
 	input_nums(&task, 1, 2);
-	switch (task)
-	{
-		case 1:
-			task1();
-			break;
-		case 2:
-			task2();
-			break;
-	}
-	//printf("%d", task);
-	//return 0;
+	function[task - 1]();
 }
