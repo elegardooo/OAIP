@@ -14,3 +14,4 @@ void rand(int** mas, int row, int col);
 void output_array(int** mas, int row, int col);
 void array_change(int** mas, int row, int col, int k);
 int** memory_realloc(int** mas, int row, int col);
+void free_mas(int** mas, int row);

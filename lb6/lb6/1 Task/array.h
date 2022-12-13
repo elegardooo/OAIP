@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctime>
+#include <time.h>
 
 void input_size(int& n);
 int* memory(int n);

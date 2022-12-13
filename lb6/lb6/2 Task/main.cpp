@@ -21,6 +21,8 @@ void main(void)
     sort(mas, n, m);
     printf("\nChanged array: ");
     output_array(mas, n, m);
+    free_mas(mas, n);
+    free(mas);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

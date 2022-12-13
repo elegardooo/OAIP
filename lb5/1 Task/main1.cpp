@@ -12,4 +12,5 @@ void main(void)
 	array_change(mas, n);
 	printf("\nChanged array: ");
 	output_array(mas, n);
+	free(mas);
 }

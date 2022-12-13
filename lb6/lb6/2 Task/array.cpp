@@ -114,3 +114,11 @@ void sort(int** mas, int n, int m)
 			}
 		} while (flg);
 }
+
+void free_mas(int** mas, int n)
+{
+
+	for (int i = 0; i < n; i++) {
+		free(mas[i]);
+	}
+}

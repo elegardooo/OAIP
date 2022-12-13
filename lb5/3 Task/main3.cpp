@@ -19,4 +19,5 @@ void main(void)
     memory_realloc(mas, row, col);
     printf("\nChanged array: ");
     output_array(mas, row, col);
+    free_mas(mas, row);
 }

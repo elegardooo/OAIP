@@ -167,3 +167,13 @@ int** memory_realloc(int** mas, int row, int col)
     }
     return mas;
 }
+
+free_mas(int** mas, int row)
+{
+    
+    for (int i = 0; i < n; i++) {
+        free(mas[i]);
+    }
+
+    free(mas);
+}

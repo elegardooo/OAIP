@@ -53,10 +53,16 @@ void array_input(int* mas, int n)
 
 void rand(int* mas, int n)
 {
-	for (int i = 0; i < n; i++)
+	int d = 0;
+	for (int i = n; i > 0; i--)
+	{
+			mas[d] = i-n;
+			d++;
+	}
+	/*for (int i = 0; i < n; i++)
 	{
 		mas[i] = rand() % 201 - 100;
-	}
+	}*/
 }
 
 void output_array(int* mas, int n)
@@ -69,8 +75,8 @@ void output_array(int* mas, int n)
 
 void sort(int* mas, int n)
 {
-	int i1, temp;
-	for (int i = 0; i < n; i++)
+	int i1, temp, flg;
+	/*for (int i = 0; i < n; i++)
 	{
 		i1 = i;
 		if (mas[i1]<0)
@@ -80,6 +86,18 @@ void sort(int* mas, int n)
 		temp = mas[i];
 		mas[i] = mas[i1];
 		mas[i1] = temp;
-	}
+	}*/
+	
+	for(int i=0; i<n;i++)
+		for (int j = 0; j < n - 1; j++)
+		{
+			if(mas[j]<0)
+			if ((mas[j] > mas[j + 1]) && (mas[j+1]<0))
+			{
+				temp = mas[j];
+				mas[j] = mas[j + 1];
+				mas[j + 1] = temp;
+			}
+		}
 }
 

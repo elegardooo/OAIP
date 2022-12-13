@@ -1,6 +1,7 @@
 ﻿// 1 Task.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
-
+#include <time.h>
+#include <stdlib.h>
 #include "array.h"
 
 void main(void)
@@ -15,10 +16,16 @@ void main(void)
     input_choose(choose);
     type_of_filling(mas, n, choose);
     printf("Array: ");
-    output_array(mas, n);
+    //output_array(mas, n);
+    clock_t start = clock();
     sort(mas, n);
+    clock_t end=clock();
     printf("\nChanged array: ");
-    output_array(mas, n);
+    //output_array(mas, n);
+    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+    printf("%f", seconds);
+
+    free(mas);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

@@ -21,4 +21,5 @@ void main(void)
     printf("\nChanged array: ");
     output_array(mas, row, col);
     memory_realloc(mas, row, col);
+    free_mas(mas, row);
 }
