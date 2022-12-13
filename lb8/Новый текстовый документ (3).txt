@@ -1,0 +1,3 @@
+"D:\bsuir\OAIP\lb8\x64\Debug"
+"Task 1.exe"
+D:\bsuir\OAIP\lb8\x64\Debug> "Task 1.exe" 1 2
