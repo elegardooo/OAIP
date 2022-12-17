@@ -14,8 +14,8 @@ char** memory(int argc)
 {
     int n = 256;
     char** str;
-    str = (char**)calloc((argc - 1), sizeof(char*));
-    for (int i = 0; i < argc - 1; i++)
+    str = (char**)calloc((argc-1), sizeof(char*));
+    for (int i = 0; i < argc-1; i++)
     {
         str[i] = (char*)calloc(n, sizeof(char));
     }
@@ -24,17 +24,14 @@ char** memory(int argc)
 
 void input_str(char** str, int argc, char** argv)
 {
-    //int n = 256;
     if (argc == 1)
     {
         printf("There is no string arguments ");
         exit(1);
     }
-    //(*str) = (char**)malloc((argc - 1) * sizeof(char));
     for (int i = 1; i < argc; i++)
     {
         int length = str_len(argv[i]);
-        //(*str)[i - 1] = (char*)malloc(n * sizeof(char));
         for (int j = 0; j < length; j++)
         {
             (str)[i - 1][j] = argv[i][j];
@@ -70,23 +67,22 @@ void output_str(char** str, int argc)
 
 void insert_sort(int argc, char** str)
 {
-    int value, k, maxlen;
-    char* valuei;
+    int value, k, maxlen;;
     for (int i = 1; i < argc - 1; i++)
     {
         value = longest_word_len((str)[i]);
-        valuei = (str)[i];
+        (str)[argc] = (str)[i];
         for (k = i - 1; k >= 0 && longest_word_len((str)[k]) < value; k--)
         {
             (str)[k + 1] = (str)[k];
         }
-        (str)[k + 1] = valuei;
+        (str)[k + 1] = (str)[argc];
     }
 }
 
-void freee (char** string, int argc, char** argv)
+void freee(char** string, int argc, char** argv)
 {
-    for (int i = 0; i < argc - 1; i++)
+    for (int i = 0; i < argc-1; i++)
     {
         free(string[i]);
     }
