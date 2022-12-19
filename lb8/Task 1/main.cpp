@@ -31,7 +31,7 @@ void input_str(char** str, int argc, char** argv)
     }
     for (int i = 1; i < argc; i++)
     {
-        int length = str_len(argv[i]);
+        int length = str_len(argv[i])
         for (int j = 0; j < length; j++)
         {
             (str)[i - 1][j] = argv[i][j];
