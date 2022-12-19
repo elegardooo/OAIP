@@ -2,3 +2,4 @@
 "Task 1.exe"
 D:\bsuir\OAIP\lb8\x64\Debug> "Task 1.exe" 1 2
 "E:\bsuir\OAIP\lb8\x64\Debug\Task 1.exe" "qwer qwe qwert" "qwer qwe" "qwr w" "qwerttttt e" "qw eee wwwwwwwwww" " "
+"D:\bsuir\Oaip1\OAIP\lb8\x64\Debug\Task 1.exe" "qwer qwe qwert" "qwer qwe" "qwr w" "qwerttttt e" "qw eee wwwwwwwwww" " "
