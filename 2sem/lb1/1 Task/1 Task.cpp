@@ -218,7 +218,7 @@ void menu(computer* laptops, int array_size)
             break;
         }
     }
-
+    free_memory(laptops, array_size);
 }
 
 int main()
