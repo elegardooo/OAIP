@@ -73,14 +73,14 @@ void input_sort_choice(int& sort_choice)
     }
 }
 
-/*void create_structure(computer* laptops, int array_size)
+void create_structure(computer* &laptops, int& array_size)
 {
-    int array_size;
+    //int array_size;
     printf("Input size of array: ");
     array_size = input_nums();
-    computer* laptops = struct_memory(array_size);
+    laptops = struct_memory(array_size);
     *laptops = struct_filling(&laptops, array_size);
-}*/
+}
 
 void name_sort(computer* laptops, int array_size)
 {
@@ -177,33 +177,39 @@ void sorting(computer* laptops, int array_size)
     printf("\nStructure was sorted!\n");
 }
 
+void free_memory(computer* laptops, int array_size)
+{
+    for (int i = 0; i < array_size; i++)
+    {
+        free(laptops[i].name);
+    }
+    free(laptops);
+}
+
 void menu(computer* laptops, int array_size)
 {
     int choice = 0, exit = 0;
+    //create_structure(laptops, array_size);
     while (exit != 3)
     {
-        printf("-------------------------------------------------\n1.Print structure.\n2.Sort structure.\n3.Exit.\nChoose the option: ");
+        printf("-------------------------------------------------\n1.Create structure.\n2.Print structure.\n3.Sort structure.\n4.Exit.\nChoose the option: ");
         //input_choice(choice);
         scanf_s("%d", &choice);
         switch (choice)
         {
-            /*case 1:
-            {
-                int array_size;
-                printf("Input size of array: ");
-                array_size = input_nums();
-                computer* laptops = struct_memory(array_size);
-                *laptops = struct_filling(&laptops, array_size);
-                exit = 1;
-            }
-                break;*/
         case 1:
-            print_structure(laptops, array_size);
+            if (exit != 1)
+                create_structure(laptops, array_size);
+            else
+                printf("Structure already created.\n");
             break;
         case 2:
-            sorting(laptops, array_size);
+            print_structure(laptops, array_size);
             break;
         case 3:
+            sorting(laptops, array_size);
+            break;
+        case 4:
             exit = 3;
             break;
         default:
@@ -212,15 +218,13 @@ void menu(computer* laptops, int array_size)
             break;
         }
     }
+
 }
 
 int main()
 {
-    int array_size;
-    printf("Input size of array: ");
-    array_size = input_nums();
-    computer* laptops = struct_memory(array_size);
-    *laptops = struct_filling(&laptops, array_size);
+    int array_size=0;
+    computer* laptops=NULL;
     //printf("%d\n", array_size);
     //print_structure(laptops, array_size);
     //printf("%s", laptops[0].name);
