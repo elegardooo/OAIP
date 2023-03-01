@@ -65,7 +65,7 @@ void output_str(char** str, int argc)
 
 void insert_sort(int argc, char** str)
 {
-    int value, k, maxlen;;
+    int value, k, maxlen;
     for (int i = 1; i < argc - 1; i++)
     {
         value = longest_word_len((str)[i]);
