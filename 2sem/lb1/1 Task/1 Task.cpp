@@ -198,15 +198,28 @@ void menu(computer* laptops, int array_size)
         switch (choice)
         {
         case 1:
-            if (exit != 1)
+            if (exit != 1) 
+            {
                 create_structure(laptops, array_size);
+                exit = 1;
+            }
             else
                 printf("Structure already created.\n");
             break;
         case 2:
+            if (exit != 1)
+            {
+                printf("You need to create structure first.\n");
+                break;
+            }
             print_structure(laptops, array_size);
             break;
         case 3:
+            if (exit != 1)
+            {
+                printf("You need to create structure first.\n");
+                break;
+            }
             sorting(laptops, array_size);
             break;
         case 4:
