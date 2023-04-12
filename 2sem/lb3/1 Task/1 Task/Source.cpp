@@ -47,7 +47,11 @@ void median_filter(BITMAPFILEHEADER BmpFile, RGBQUAD* Px)
 {
     int count;
     printf("Enter count:");
-    scanf_s("%d", &count);
+    while (scanf_s("%d", &count) != 1 || getchar() != '\n')
+    {
+        printf("Wrong input. Enter count:");
+        rewind(stdin);
+    }
     int N = count / 2;
     for (int y = N; y < BmpFile.Header.size.height - N; y++)
     {
@@ -84,7 +88,11 @@ void gamma_correction_filter(BITMAPFILEHEADER BmpFile, RGBQUAD* Px, int Size)
 {
     float gamma;
     printf("Enter the gamma value: ");
-    scanf_s("%f", &gamma);
+    while (scanf_s("%f", &gamma) != 1 || getchar() != '\n')
+    {
+        printf("Wrong input. Enter the gamma value:");
+        rewind(stdin);
+    }
     for (int i = 0; i < BmpFile.Header.size.height * BmpFile.Header.size.width; i++)
     {
         Px[i].rgbRed = 255 * pow(Px[i].rgbRed / 255.0f, gamma);
