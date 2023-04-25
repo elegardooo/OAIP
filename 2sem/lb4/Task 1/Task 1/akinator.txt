@@ -1,0 +1,82 @@
+It is alive
+It is made of metal
+It is made of wood
+It is Rock
+-1
+-1
+Can it contain something
+You are sitting on it
+It is Table
+-1
+-1
+It is comfortable to sit on it
+It is Chair
+-1
+-1
+It is Lounge chair
+-1
+-1
+It is Closet
+-1
+-1
+Can you eat from it
+It is Fork
+-1
+-1
+It is Plate
+-1
+-1
+It is a plant
+It is a human
+It is Bacteria
+-1
+-1
+It is animal
+It is poisonous mushroom
+It is Honey Mushroom
+-1
+-1
+It is Fly Agaric
+-1
+-1
+It is flying animal
+It is fish
+It is fast running animal
+It is Turtle
+-1
+-1
+It is Cheetah
+-1
+-1
+It is dangerous fish
+It is Carp
+-1
+-1
+It is Shark
+-1
+-1
+It is fast flying animal
+It is Flying snake
+-1
+-1
+It is Peregrine
+-1
+-1
+It is studying in the university
+It is Pupil
+-1
+-1
+It is Student
+-1
+-1
+It is a fruit plant
+It is Grass
+-1
+-1
+It is grows sour fruits
+It is Pear tree
+-1
+-1
+It is Apple tree
+-1
+-1
