@@ -16,7 +16,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
   <ItemGroup>
-    <ClCompile Include="src/main.cpp"/>
+    <ClCompile Include="OAIP"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Targets"/>
 </Project>
