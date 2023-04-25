@@ -6,7 +6,9 @@
 
 int main()
 {
-    int a, b, c;
+    int a;
+    int b;
+    int c;
     float S;
     printf("Enter the sides of an equilateral triangle: ");
     scanf("%d, %d, %d", &a, &b, &c);
