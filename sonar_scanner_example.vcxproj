@@ -16,7 +16,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
   <ItemGroup>
-    <ClCompile Include="\1sem\lb2"/>
+    <ClCompile Include="/1sem/lb2/2 Task/2 Task.cpp"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Targets"/>
 </Project>
