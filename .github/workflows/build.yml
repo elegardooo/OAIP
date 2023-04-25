@@ -22,9 +22,10 @@ jobs:
       #here goes your compilation wrapped with build-wrapper; See https://docs.sonarcloud.io/advanced-setup/languages/c-c-objective-c/#analysis-steps-using-build-wrapper for more information
       # build-preparation steps
       # build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} build-command
-      - name: Run sonar-scanner
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          sonar-scanner --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
+      - name: sonar-scanner
+  # You may pin to the exact commit or the version.
+  # uses: Warchant/setup-sonar-scanner@3a54371c833a3a8c9b1fb24d590a6396b96a6d93
+        uses: Warchant/setup-sonar-scanner@v4
+        with:
+    # Sonar-scanner version
+            version: 4.6.2.2472
