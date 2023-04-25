@@ -28,10 +28,11 @@ It is Plate
 -1
 It is a plant
 It is a human
+It is animal
+It is mushroom
 It is Bacteria
 -1
 -1
-It is animal
 It is poisonous mushroom
 It is Honey Mushroom
 -1
