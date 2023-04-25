@@ -9,13 +9,13 @@ int main()
     int a;
     int b;
     int c;
-    float S;
+    double S;
     printf("Enter the sides of an equilateral triangle: ");
     scanf("%d, %d, %d", &a, &b, &c);
-    while (a < 0 || b < 0 || c < 0)
+    while ((a < 0) || (b < 0) || (c < 0))
     {
         printf("Wrong input, Enter the sides of an equilateral triangle: ");
-        scanf("%d, %d, %d", &a, &b, &c);
+        scanf_s("%d, %d, %d", &a, &b, &c);
     }
     if (a == b && a == c)
     {
