@@ -7,7 +7,12 @@
 
 int main()
 {
-    int x,y,x1,y1,x2,y2;
+    int x;
+    int y;
+    int x1;
+    int y1;
+    int x2;
+    int y2;
     printf("Enter points data: ");
     scanf("%d, %d, %d ,%d ,%d ,%d", &x, &y, &x1, &y1, &x2, &y2);
     if (pow((x1 - x),2) + pow((y1 - y),2) == pow((x2 - x),2) + pow((y2 - y),2))
