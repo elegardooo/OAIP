@@ -19,7 +19,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-c-cpp@v1
       - name: Run build-wrapper
         run: |
-          build-wrapper-win-x86-64.exe --out-dir build_wrapper_output_directory sonar_scanner_example.vcxproj
+          build-wrapper-win-x86-64.exe --out-dir build_wrapper_output_directory sonar_scanner_example.vcxproj /t:rebuild /nodeReuse:false
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
