@@ -18,6 +18,7 @@ char* trim_start(char* str);
 char* trim_end(char* str);
 Tree* deserialize_tree(FILE* Input);
 void serialize_tree(Tree* Root, FILE* Output);
-Tree* Create_Node(Tree* Left, Tree* Right, char* str);
+Tree* create_node(Tree* Left, Tree* Right, char* str);
 void edit_tree(Tree* Root);
 void akinator(Tree* Root);
+void free_memory(Tree* Root);

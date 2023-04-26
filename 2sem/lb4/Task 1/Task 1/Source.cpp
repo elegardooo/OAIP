@@ -34,7 +34,7 @@ char* trim_end(char* str)
 Tree* deserialize_tree(FILE* Input)
 {
     Tree* Node = (Tree*)malloc(sizeof(Tree));
-    if (fgets(Node->Word, 255, Input) == NULL)
+    if (fgets(Node->Word, STR_MAX_VALUE, Input) == NULL)
         return NULL;
     //printf("%s", Node->Word);
     trim_end(Node->Word);
@@ -61,7 +61,7 @@ void serialize_tree(Tree* Root, FILE* Output)
     serialize_tree(Root->Right, Output);
 }
 
-Tree* Create_Node(Tree* Left, Tree* Right, char* str)
+Tree* create_node(Tree* Left, Tree* Right, char* str)
 {
     Tree* Node = (Tree*)malloc(sizeof(Tree));
     strcpy(Node->Word, str);
@@ -81,8 +81,8 @@ void edit_tree(Tree* Root)
     fgets(New_Question, STR_MAX_VALUE, stdin);
     trim_start(New_Question);
     trim_end(New_Question);
-    Root->Left = Create_Node(NULL, NULL, Root->Word);
-    Root->Right = Create_Node(NULL, NULL, New_Answer);
+    Root->Left = create_node(NULL, NULL, Root->Word);
+    Root->Right = create_node(NULL, NULL, New_Answer);
     strcpy(Root->Word, New_Question);
 }
 
@@ -109,5 +109,18 @@ void akinator(Tree* Root)
             akinator(Root->Left);
         if (choose == 1)
             akinator(Root->Right);
+    }
+}
+
+void free_memory(Tree* Root)
+{
+    if (Root->Left == NULL && Root->Right == NULL)
+    {
+        free(Root->Word);
+    }
+    else
+    {
+        free_memory(Root->Left);
+        free_memory(Root->Right);
     }
 }

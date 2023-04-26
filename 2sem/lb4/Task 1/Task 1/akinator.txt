@@ -34,7 +34,11 @@ It is Bacteria
 -1
 -1
 It is poisonous mushroom
+It has grey color
 It is Honey Mushroom
+-1
+-1
+Shampniyon
 -1
 -1
 It is Fly Agaric

@@ -18,5 +18,7 @@ int main()
         exit(1);
     }
     serialize_tree(Root, Output);
+    fclose(Output);
+    free_memory(Root);
     return 0;
 }
