@@ -5,6 +5,7 @@
 #include <ctype.h>
 
 #define MAX_STR_VALUE 255
+#define CACHE_SIZE 4
 
 typedef struct cache
 {
@@ -18,6 +19,7 @@ typedef struct list
 {
     cache* head;
     cache* tail;
+    cache** hash;
 } list;
 
 typedef struct data
@@ -25,6 +27,16 @@ typedef struct data
     char domain[MAX_STR_VALUE];
     char ip[MAX_STR_VALUE];
 } data;
+
+int hashing(char* str)
+{
+    int hash = 0;
+    for (int i = 0; str[i] != '\0'; i++)
+        hash = hash * 31 + str[i];
+    if (hash < 0)
+        hash=hash*(-1);
+    return hash % CACHE_SIZE;
+}
 
 void push(data* Data, list* List)
 {
@@ -42,6 +54,22 @@ void push(data* Data, list* List)
     {
         List->tail = temp;
     }
+    int hash_val = hashing(temp->key);
+    /*if (List->hash[hash_val])
+        List->hash[hash_val]->prev = temp;
+    List->hash[hash_val] = temp;*/
+    if (List->hash[hash_val] == NULL)
+        List->hash[hash_val] = temp;
+    else
+    {
+        cache* node = List->hash[hash_val];
+        while (node->next != NULL)
+            node = node->next;
+        node->next = temp;
+        temp->prev = node;
+    }
+   // printf("%s\n", List->hash[hash_val]);
+    List->tail->next = NULL;
 }
 
 void* pop(list* List)
@@ -56,17 +84,27 @@ void* pop(list* List)
         List->tail->next = NULL;
     if (next == List->head)
         List->head = NULL;
+    //temp = next->value;
+    //free(next);
+    int hash_val = hashing(List->tail->key);
+    cache* node = List->hash[hash_val];
+    while (node != NULL)
+    {
+        if (node == List->tail)
+            List->hash[hash_val] = List->tail->next;
+        else
+            if (node->next = List->tail)
+                node->next = List->tail->next;
+        if (node == List->tail || node->next == List->tail)
+            break;
+        node = node->next;
+    }
     temp = next->value;
     free(next);
-    return temp;
-}
-
-int hashing(char* str)
-{
-    int hash = 0;
-    for (int i = 0; str[i] != '\0'; i++)
-        hash = hash * 31 + str[i];
-    return hash % 100;
+    //free(List->tail->key);
+    //free(List->tail->value);
+    //free(List->tail);
+    //return temp;
 }
 
 data* read_data(data* Data, char* str)
@@ -75,30 +113,37 @@ data* read_data(data* Data, char* str)
     for (int i = 0; str[i] != ' '; i++)
     {
         Data->domain[i] = str[i];
-        if (str[i+1] == ' ')
+        if (str[i + 1] == ' ')
         {
-            Data->domain[i+1] = '\0';
-            pos = i+1;
+            Data->domain[i + 1] = '\0';
+            pos = i + 1;
         }
     }
     for (int i = 0, j = pos + 1; str[j] != '\n'; i++, j++)
     {
         Data->ip[i] = str[j];
-        if (str[j+1] == '\n')
-            Data->ip[i+1] = '\0';
+        if (str[j + 1] == '\n')
+            Data->ip[i + 1] = '\0';
     }
-    int b = hashing(Data->domain);
-    printf("%d ", b);
+    //hashing(Data->domain);
+    //printf("%d ", b);
     return Data;
 }
 
-list* cache_memory()
+list* create_cache()
 {
     list* temp = (list*)malloc(sizeof(list));
     if (temp == NULL)
         exit(1);
     temp->head = NULL;
     temp->tail = NULL;
+    temp->hash = (cache**)malloc(CACHE_SIZE * sizeof(cache*));
+    if (temp->hash == NULL)
+        exit(1);
+    for (int i = 0; i < CACHE_SIZE; i++)
+    {
+        temp->hash[i] = NULL;
+    }
     return temp;
 }
 
@@ -116,7 +161,7 @@ list* deserialize_list()
         exit(1);
     list* List = NULL;
     for (int i = 0; i < 4; i++)
-        List = cache_memory();
+        List = create_cache();
     while (fgets(str, MAX_STR_VALUE, Input) != NULL)
     {
         Data = read_data(Data, str);
@@ -144,7 +189,8 @@ void serialize_list(list* List)
 
 int find_ip_in_cache(list* List, char* domain, int found)
 {
-    for (cache* info = List->head; info != List->tail->next; info = info->next)
+    int hash_val = hashing(domain);
+    for (cache* info = List->hash[hash_val]; info; info = info->next)
     {
         if (strcmp(info->key, domain) == 0)
         {
@@ -186,8 +232,17 @@ void print_cache(list* List)
 {
     for (cache* info = List->head; info != List->tail->next; info = info->next)
     {
-        printf("\nDomain is: '%s'\t", info->key);
+        printf("\nDomain is: '%s'       ", info->key);
         printf("IP is: '%s'\n", info->value);
+    }
+    cache* temp;
+    for (int i = 0; i < CACHE_SIZE; ++i) {
+        temp = List->hash[i];
+        if (temp != NULL) {
+            printf("\n %d Domain is: '%s'       ", i, List->hash[i]->key);
+            printf("IP is: '%s'\n", List->hash[i]->value);
+            temp = temp->next;
+        }
     }
 }
 
@@ -219,7 +274,7 @@ int main()
             printf("Enter the domain name: ");
             if (scanf("%s", &domain) == NULL)
                 return 0;
-            //printf("%s\n", domain);
+            //printf("%s\n", List->tail->key);
             found = find_ip_in_cache(List, domain, found);
             if (found == 0)
             {

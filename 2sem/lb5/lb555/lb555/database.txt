@@ -1,0 +1,9 @@
+lms.bsuir.by 192.168.251.23
+lms2.bsuir.by lms.bsuir.by
+telegram.me 149.154.167.99
+t.me telegram.me
+youtube.com 108.177.119.190
+youtu.be youtube.com
+google.com 108.177.126.139
+facebook.com 157.240.214.35
+github.com 140.82.121.4

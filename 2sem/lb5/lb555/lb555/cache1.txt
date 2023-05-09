@@ -1,0 +1,3 @@
+lms.bsuir.by 192.168.251.23
+youtube.com 108.177.119.190
+github.com 140.82.121.4
