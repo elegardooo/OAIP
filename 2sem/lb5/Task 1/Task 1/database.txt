@@ -1,9 +1,11 @@
-lms.bsuir.by 192.168.251.23
-lms2.bsuir.by lms.bsuir.by
-telegram.me 149.154.167.99
-t.me telegram.me
-youtube.com 108.177.119.190
-youtu.be youtube.com
-google.com 108.177.126.139
-facebook.com 157.240.214.35
-github.com 140.82.121.4
+lms.bsuir.by IN A 192.168.251.23
+lms2.bsuir.by IN CNAME lms.bsuir.by
+telegram.me IN A 149.154.167.99
+t.me IN CNAME telegram.me
+youtube.com IN A 108.177.119.190
+youtu.be IN CNAME youtube.com
+google.com IN A 108.177.126.139
+facebook.com IN A 157.240.214.35
+github.com IN A 140.82.121.4
+ln.fe IN A 192.168.251.23
+lb.be IN A 192.168.251.23

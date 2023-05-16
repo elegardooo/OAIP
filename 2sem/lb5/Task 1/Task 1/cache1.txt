@@ -1,3 +1,0 @@
-lms.bsuir.by 192.168.251.23
-facebook.com 157.240.214.35
-telegram.me 149.154.167.99
