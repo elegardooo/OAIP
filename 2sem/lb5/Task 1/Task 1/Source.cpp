@@ -377,6 +377,49 @@ void add_to_head(node** head, node** tail, char* key, char* value)
 
 }
 
+hashtable_object* hashtable_search_to_head(hashtable* table, const char* key)
+{
+    int index = hash_domain(key);
+    hashtable_object* current_object = table->objects[index];
+    list* head = table->chains[index];
+    while (current_object != NULL)
+    {
+        if (!strcmp(current_object->key, key))
+            return current_object;
+        if (head == NULL)
+            return NULL;
+        current_object = head->object;
+        head = head->next;
+    }
+    return NULL;
+}
+
+void move_to_head(cache* Cache, char* key)
+{
+    int index = hash_domain(key);
+    hashtable_object* object = hashtable_search_to_head(Cache->table, key);
+    if (object == NULL)
+    {
+        return;
+    }
+    if (Cache->head == object->node) {
+        return;
+    }
+    object->node->prev->next = object->node->next;
+    if (object->node->next != NULL)
+    {
+        object->node->next->prev = object->node->prev;
+    }
+    else
+    {
+        Cache->tail = object->node->prev;
+    }
+    object->node->next = Cache->head;
+    Cache->head->prev = object->node;
+    Cache->head = object->node;
+    object->node->prev = NULL;
+}
+
 list* create_list()
 {
     list* new_list = (list*)malloc(sizeof(list));
@@ -462,6 +505,20 @@ void add_to_hashtable(hashtable* table, node* node, char* key)
     }
 }
 
+void object_delete(node** head, node** tail, char* key, char* value)
+{
+    node* temp = (*head);
+    if ((*tail) != (*head))
+    {
+        while ((temp->next != (*tail)) && (temp->key != key))
+        {
+            printf("%s", temp->key);
+            temp = temp->next;
+        }
+        (*tail) = temp;
+        (*tail)->next = NULL;
+    }
+}
 void insert_in_cache(cache* Cache, char* key, char* value)
 {
     if (Cache->count >= CACHE_SIZE)
@@ -472,6 +529,11 @@ void insert_in_cache(cache* Cache, char* key, char* value)
     add_to_head(&Cache->head, &Cache->tail, key, value);
     add_to_hashtable(Cache->table, Cache->head, key);
     Cache->count++;
+}
+
+void update_cache(cache* Cache, char* key, char* value)
+{
+    object_delete(&Cache->head, &Cache->tail, key, value);
 }
 
 char* find_ip_in_cache(cache* Cache, char* key, int mark)
@@ -537,6 +599,7 @@ void find_ip_by_domain(cache* Cache)
     if (found_in_cache != NULL)
     {
         printf("IP adress: %s\n", found_in_cache);
+        move_to_head(Cache, domain);
     }
 }
 
