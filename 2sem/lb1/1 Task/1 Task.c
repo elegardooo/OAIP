@@ -82,7 +82,7 @@ void create_structure(computer** laptops, int* array_size)
     printf("Input size of array: ");
     (*array_size) = input_nums();
     *laptops = struct_memory(*array_size);
-    **laptops = struct_filling(&*laptops, *array_size);
+    **laptops = struct_filling(&(*laptops), *array_size);
 }
 
 void name_sort(computer* laptops, int array_size)
@@ -201,11 +201,11 @@ void deleting(computer** laptops, int* array_size)
     free((*laptops)[del_num-1].name);
     for (int i = del_num-1; i < (*array_size)-1; i++)
     {
-        //laptops[i].name = laptops[i + 1].name;
-        //laptops[i].Matrix_frequency = laptops[i + 1].Matrix_frequency;
-        //laptops[i].RAM = laptops[i + 1].RAM;
-        //laptops[i].Memory = laptops[i + 1].Memory;
-        (*laptops)[i] = (*laptops)[i + 1];
+        (*laptops)[i].name = (*laptops)[i + 1].name;
+        (*laptops)[i].Matrix_frequency = (*laptops)[i + 1].Matrix_frequency;
+        (*laptops)[i].RAM = (*laptops)[i + 1].RAM;
+        (*laptops)[i].Memory = (*laptops)[i + 1].Memory;
+        //(*laptops)[i] = (*laptops)[i + 1];
     }
     //printf("\n%d", array_size);
     (*array_size) = (*array_size) - 1;
