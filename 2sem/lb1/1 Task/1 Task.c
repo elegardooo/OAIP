@@ -31,13 +31,8 @@ char* name_input(char** string)
         (*string)[length++] = c;
     (*string)[length]= '\0';*/
     fgets((*string), max_size, stdin);
-    if((*string) != NULL)
-    {
-        length = strlen((*string));
-        (*string)[length-1] = '\0';
-    }
-    else
-        exit(1);
+    length = strlen((*string));
+    (*string)[length-1] = '\0';
     return *string;
 }
 
