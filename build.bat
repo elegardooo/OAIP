@@ -1,1 +1,1 @@
-msbuild "2sem\lb1\1 Task.vcxpro"
+msbuild "2sem\lb1\1 Task.vcxproj"
