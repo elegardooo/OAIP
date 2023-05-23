@@ -1,12 +1,13 @@
-﻿
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 typedef struct computer
 {
     char* name;
-    int Matrix_frequency, RAM, Memory;
+    int Matrix_frequency;
+    int RAM;
+    int Memory;
 } computer;
 
 int input_nums()
@@ -22,7 +23,9 @@ int input_nums()
 
 char* name_input(char** string)
 {
-    int max_size = 255, length=0, c;
+    int max_size = 255;
+    int length = 0;
+    int c;
     (*string) = (char*)calloc(max_size, sizeof(char));
     while (--max_size > 0 && (c = getchar()) != EOF && c != '\n')
         (*string)[length++] = c;
@@ -64,22 +67,22 @@ void print_structure(computer* laptops, int array_size)
     }
 }
 
-void input_sort_choice(int& sort_choice)
+void input_sort_choice(int* sort_choice)
 {
-    while (scanf_s("%d", &sort_choice) != 1 || sort_choice < 1 || sort_choice > 4 || getchar() != '\n')
+    while (scanf_s("%d", *sort_choice) != 1 || sort_choice < 1 || sort_choice > 4 || getchar() != '\n')
     {
         printf("Wrong input. Try again.\n");
         while (getchar() != '\n');
     }
 }
 
-void create_structure(computer* &laptops, int& array_size)
+void create_structure(computer** laptops, int* array_size)
 {
     //int array_size;
     printf("Input size of array: ");
-    array_size = input_nums();
-    laptops = struct_memory(array_size);
-    *laptops = struct_filling(&laptops, array_size);
+    (*array_size) = input_nums();
+    *laptops = struct_memory(*array_size);
+    **laptops = struct_filling(&*laptops, *array_size);
 }
 
 void name_sort(computer* laptops, int array_size)
@@ -158,7 +161,7 @@ void sorting(computer* laptops, int array_size)
 {
     int sort_choice = 0;
     printf("\n1.Sort by Name.\n2.Sort by Matrix Frequency.\n3.Sort by RAM.\n4.Sort by Memory.\nChoose the type of sorting: ");
-    input_sort_choice(sort_choice);
+    input_sort_choice(&sort_choice);
     switch (sort_choice)
     {
     case 1:
@@ -186,28 +189,28 @@ void free_memory(computer* laptops, int array_size)
     free(laptops);
 }
 
-void deleting(computer* &laptops, int& array_size)
+void deleting(computer** laptops, int* array_size)
 {
     int del_num=0;
-    printf("\nChoose laptop number to remove(From 1 to %d): ", array_size);
-    while (scanf_s("%d", &del_num)!= 1 || (del_num < 1) || (del_num > array_size) || getchar()!='\n')
+    printf("\nChoose laptop number to remove(From 1 to %d): ", *array_size);
+    while (scanf_s("%d", &del_num)!= 1 || (del_num < 1) || (del_num > *array_size) || getchar()!='\n')
     {
         printf("Wrong input. Try again.\n\n");
         rewind(stdin);
     }
-    free(laptops[del_num-1].name);
-    for (int i = del_num-1; i < array_size-1; i++)
+    free((*laptops)[del_num-1].name);
+    for (int i = del_num-1; i < (*array_size)-1; i++)
     {
         //laptops[i].name = laptops[i + 1].name;
         //laptops[i].Matrix_frequency = laptops[i + 1].Matrix_frequency;
         //laptops[i].RAM = laptops[i + 1].RAM;
         //laptops[i].Memory = laptops[i + 1].Memory;
-        laptops[i] = laptops[i + 1];
+        (*laptops)[i] = (*laptops)[i + 1];
     }
     //printf("\n%d", array_size);
-    array_size = array_size - 1;
+    (*array_size) = (*array_size) - 1;
    // printf("\n%s\n%s\n%s\n%d\n", laptops[0].name, laptops[1].name, laptops[2].name, array_size);
-    laptops = (computer*)realloc(laptops, array_size  * sizeof(computer));
+    *laptops = (computer*)realloc(*laptops, (*array_size)  * sizeof(computer));
     //printf("\n%s\n%s\n", laptops[0].name, laptops[1].name);
 }
 
@@ -306,7 +309,7 @@ void menu(computer* laptops, int array_size)
         case 1:
             if (exit != 1) 
             {
-                create_structure(laptops, array_size);
+                create_structure(&laptops, &array_size);
                 exit = 1;
             }
             else
@@ -347,7 +350,7 @@ void menu(computer* laptops, int array_size)
                 printf("There's only 1 laptop.\n");
                 break;
             }
-            deleting(laptops, array_size);
+            deleting(&laptops, &array_size);
             break;
         case 6:
             exit = 3;
