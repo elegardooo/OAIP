@@ -30,10 +30,11 @@ char* name_input(char** string)
     /*while ((--max_size > 0) && (((c = getchar()) != EOF) && (c != '\n')))
         (*string)[length++] = c;
     (*string)[length]= '\0';*/
-    if (fgets((*string), max_size, stdin))
+    fgets((*string), max_size, stdin);
+    if((*string) != NULL)
     {
         length = strlen((*string));
-        (*string)[length] = '\0';
+        (*string)[length-1] = '\0';
     }
     else
         exit(1);
