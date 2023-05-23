@@ -27,7 +27,7 @@ char* name_input(char** string)
     int length = 0;
     int c;
     (*string) = (char*)calloc(max_size, sizeof(char));
-    while (--max_size > 0 && (c = getchar()) != EOF && c != '\n')
+    while ((--max_size > 0) && (((c = getchar()) != EOF) && (c != '\n')))
         (*string)[length++] = c;
     (*string)[length]= '\0';
     return *string;
@@ -82,7 +82,7 @@ void create_structure(computer** laptops, int* array_size)
     printf("Input size of array: ");
     (*array_size) = input_nums();
     *laptops = struct_memory(*array_size);
-    **laptops = struct_filling(&(*laptops), *array_size);
+    **laptops = struct_filling((laptops), *array_size);
 }
 
 void name_sort(computer* laptops, int array_size)
