@@ -27,9 +27,16 @@ char* name_input(char** string)
     int length = 0;
     int c;
     (*string) = (char*)calloc(max_size, sizeof(char));
-    while ((--max_size > 0) && (((c = getchar()) != EOF) && (c != '\n')))
+    /*while ((--max_size > 0) && (((c = getchar()) != EOF) && (c != '\n')))
         (*string)[length++] = c;
-    (*string)[length]= '\0';
+    (*string)[length]= '\0';*/
+    if (fgets((*string), max_size, stdin))
+    {
+        length = strlen((*string));
+        (*string)[length] = '\0';
+    }
+    else
+        exit(1);
     return *string;
 }
 
