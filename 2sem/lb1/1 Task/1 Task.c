@@ -24,7 +24,7 @@ int input_nums()
 size_t string_length(char* src)
 {
     char dest[256];
-    strncpy(dest, src, sizeof dest); // Truncation may happen
+    strncpy_s(dest, sizeof dest, src, sizeof dest); // Truncation may happen
     dest[sizeof dest - 1] = 0;
     return strlen(dest); // Compliant: "dest" is guaranteed to be null-terminated
 }
