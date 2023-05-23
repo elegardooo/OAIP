@@ -21,14 +21,6 @@ int input_nums()
     return number;
 }
 
-size_t string_length(char* src)
-{
-    char dest[256];
-    strncpy_s(dest, sizeof dest, src, sizeof dest); // Truncation may happen
-    dest[sizeof dest - 1] = 0;
-    return strlen(dest); // Compliant: "dest" is guaranteed to be null-terminated
-}
-
 char* name_input(char** string)
 {
     int max_size = 255;
@@ -39,7 +31,7 @@ char* name_input(char** string)
         (*string)[length++] = c;
     (*string)[length]= '\0';*/
     fgets((*string), max_size, stdin);
-    length = string_length((*string));
+    length = strlen((*string));
     (*string)[length-1] = '\0';
     return *string;
 }
