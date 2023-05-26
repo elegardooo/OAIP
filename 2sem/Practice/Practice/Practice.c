@@ -5,7 +5,6 @@
 int** memory_alloc(int size)
 {
     int memory_size = size;
-    printf("%d", size);
     int** temp = (int**)calloc(memory_size, sizeof(int*));
     if(!temp)
     {
@@ -103,7 +102,6 @@ int main()
         printf("Wrong input. Try again\n");
         rewind(stdin);
     }
-    printf("%d", vertices);
     matrix = memory_alloc(vertices);
     matrix_filling(matrix, vertices);
     matrix_printing(matrix, vertices);
