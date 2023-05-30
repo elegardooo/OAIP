@@ -140,12 +140,13 @@ void add_dictionary(Dictionary_Nums* Numbers, int DictionaryCount, Dictionary** 
         {
             fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].TranslationWord);
             Marks(str, i, CompressedFile_txt);
-            break;
+            goto breakout;
         }
         if (strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) == 0)
         {
             fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord);
             Marks(str, i, CompressedFile_txt);
+            breakout:
             break;
         }
     }

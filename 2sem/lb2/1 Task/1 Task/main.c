@@ -5,7 +5,7 @@ int main()
     Words* word = (Words*)calloc(1, sizeof(Words)); 
     if (!word)
         exit(1);
-    Dictionary* dictionary = (Dictionary*)calloc(NULL, sizeof(Dictionary));
+    Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
     if (!dictionary)
         exit(1);
     FILE* File_txt;
