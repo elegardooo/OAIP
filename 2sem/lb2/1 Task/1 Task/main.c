@@ -29,8 +29,8 @@ int main()
         return 0;
     qsort(word, WordCount, sizeof(word[0]), compare);
     dictionary = FillDictionary(word, WordCount, &DictionaryCount);
-    if (!dictionary)
-        exit(1);
+    if (dictionary == NULL)
+        return 0;
     for (int i = 0; i < DictionaryCount; i++)
     {
         fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
