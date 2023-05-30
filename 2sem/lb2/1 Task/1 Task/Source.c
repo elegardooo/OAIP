@@ -1,10 +1,10 @@
 #include "Header.h"
 
-int compare(const void* x1, const void* x2)   // функция сравнения элементов массива
+int compare(const void* x1, const void* x2)
 {
     const Words* k = (const Words*)x1;
     const Words* m = (const Words*)x2;
-    int s = ((k->size) - (m->size));              // если результат вычитания равен 0, то числа равны, < 0: x1 < x2; > 0: x1 > x2
+    int s = ((k->size) - (m->size));
     return s;
 }
 
@@ -50,7 +50,7 @@ void Marks(char* str, int i, FILE* file)
 }
 
 
-Words* Words_For_Dictionary(FILE* File_txt, int& WordCount)
+Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
 {
     Words* words = (Words*)calloc(1, sizeof(Words));
     char* word = (char*)calloc(1, sizeof(char));
@@ -64,69 +64,55 @@ Words* Words_For_Dictionary(FILE* File_txt, int& WordCount)
             if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
             {
                 word[WordNum] = '\0';
-                WordNum = FindWordIndex(word, words, WordCount);
+                WordNum = FindWordIndex(word, words, *WordCount);
                 if (WordNum == -7)
                 {
-                    int WordIndex = WordCount;
+                    int WordIndex = *WordCount;
                     strcpy(words[WordIndex].wordName, word);
                     words[WordIndex].count = 1;
                     words[WordIndex].size = strlen(word);
                     words[WordIndex].Swapped = 0;
                     words[WordIndex].lettersnum = strlen(word);
                     WordIndex = WordIndex + 1;
-                    WordCount = WordCount + 1;
+                    *WordCount = (*WordCount) + 1;
                     words = (Words*)realloc(words, (WordIndex + 1) * sizeof(Words));
-                    //printf("%s", word);
-                    //printf("%d", words[2].size);
                 }
                 else
                 {
-                    //printf("%s", word);
                     words[WordNum].count = words[WordNum].count + 1;
                     words[WordNum].lettersnum += strlen(word);
                 }
                 WordNum = 0;
-                //printf("%d", WordCount);
             }
             else
             {
                 word[WordNum] = str[i];
                 word = (char*)realloc(word, (WordNum + 2) * sizeof(char));
                 WordNum++;
-                //printf("%d", WordNum);
             }
-            //printf("%d", words[0].pos);
-            //printf("%d", WordNum);
-            //printf("%c", str[i]);
-            //printf(" %d ", WordNum);
         }
     }
-    //printf("%d", WordCount);
-    /*for (int i = 0; i < WordCount; i++)
-    {
-        printf("  %d  ", words[i].count);
-    }*/
     free(str);
     return words;
 }
 
-Dictionary* FillDictionary(Words* word, int WordCount, int& DictionaryCount)
+Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
 {
     Dictionary* dictionary = (Dictionary*)calloc(2048, sizeof(Dictionary));
     for (int i = 0; i < WordCount; i++)
     {
-        if (word[i].Swapped != 1) //continue;
+        if (word[i].Swapped != 1)
 
             for (int j = 1; j < WordCount; j++)
             {
-                if (word[j].Swapped != 1) //continue;
+                if (word[j].Swapped != 1)
 
                     if (word[i].size != 0 && word[i].count > 1 && (word[i].lettersnum + word[j].lettersnum) > ((word[i].size * word[j].count) + (word[j].size * word[i].count)))
                     {
-                        int DictionaryIndex = DictionaryCount;
+                        int DictionaryIndex = *DictionaryCount;
                         strcpy(dictionary[DictionaryIndex].DictionaryWord, word[i].wordName);
                         strcpy(dictionary[DictionaryIndex].TranslationWord, word[j].wordName);
-                        DictionaryCount = DictionaryCount + 1;
+                        *DictionaryCount = (*DictionaryCount) + 1;
                         DictionaryIndex++;
                         dictionary = (Dictionary*)realloc(dictionary, (DictionaryIndex + 2) * sizeof(Dictionary));
                         word[i].Swapped = 1; word[j].Swapped = 1;
@@ -154,7 +140,6 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
             if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
             {
                 word[WordNum] = '\0';
-                //printf("%d", DictionaryCount);
                 for (DictionaryIndex = 0; DictionaryIndex < DictionaryCount; DictionaryIndex++)
                 {
                     if (strcmp(dictionary[DictionaryIndex].DictionaryWord, word) == 0)
@@ -183,7 +168,6 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
             else
             {
                 word[WordNum] = str[i];
-                //if (word == NULL) break;
                 word = (char*)realloc(word, (WordNum + 2) * sizeof(char));
                 WordNum++;
             }
