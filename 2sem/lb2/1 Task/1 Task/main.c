@@ -24,8 +24,9 @@ int main()
         perror("File open error");
         exit(1);
     }
-    if(!(word = Words_For_Dictionary(File_txt, &WordCount)))
-        exit(1);
+    word = Words_For_Dictionary(File_txt, &WordCount);
+    if (word == NULL)
+        return 0;
     qsort(word, WordCount, sizeof(word[0]), compare);
     dictionary = FillDictionary(word, WordCount, &DictionaryCount);
     if (!dictionary)
