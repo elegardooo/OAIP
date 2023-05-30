@@ -36,6 +36,8 @@ int main()
     if (dictionary != NULL)
     {
         dictionary = FillDictionary(word, WordCount, &DictionaryCount);
+        if (dictionary == NULL)
+            return NULL;
     }
     if (dictionary == NULL)
         return NULL;
