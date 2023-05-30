@@ -55,18 +55,15 @@ void Marks(const char* str, int i, FILE* file)
 void add_words(int* WordNum, int *WordCount, Words* *words, char* word)
 {
     word[*WordNum] = '\0';
-    //printf("%d\n", *WordNum);
     *WordNum = FindWordIndex(word, *words, *WordCount);
     if (*WordNum == -7)
     {
         int WordIndex = *WordCount;
-        //printf("%d", WordIndex);
         strcpy_s((*words)[WordIndex].wordName, WORD_MAX_LENGTH, word);
         (*words)[WordIndex].count = 1;
         (*words)[WordIndex].size = strlen(word);
         (*words)[WordIndex].Swapped = 0;
         (*words)[WordIndex].lettersnum = strlen(word);
-        //printf("%d\n", words[WordIndex].lettersnum);
         WordIndex = WordIndex + 1;
         *WordCount = (*WordCount) + 1;
         *words = (Words*)realloc(*words, (WordIndex + 1) * sizeof(Words));
@@ -97,26 +94,6 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
             if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
             {
                 add_words(&WordNum, WordCount, &words, word);
-                /*word[WordNum] = '\0';
-                WordNum = FindWordIndex(word, words, *WordCount);
-                if (WordNum == -7)
-                {
-                    int WordIndex = *WordCount;
-                    strcpy_s(words[WordIndex].wordName, WORD_MAX_LENGTH, word);
-                    words[WordIndex].count = 1;
-                    words[WordIndex].size = strlen(word);
-                    words[WordIndex].Swapped = 0;
-                    words[WordIndex].lettersnum = strlen(word);
-                    WordIndex = WordIndex + 1;
-                    *WordCount = (*WordCount) + 1;
-                    words = (Words*)realloc(words, (WordIndex + 1) * sizeof(Words));
-                }
-                else
-                {
-                    words[WordNum].count = words[WordNum].count + 1;
-                    words[WordNum].lettersnum += strlen(word);
-                }
-                WordNum = 0;*/
             }
             else
             {
@@ -154,13 +131,42 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
     return dictionary;
 }
 
+void add_dictionary(int* WordNum, int DictionaryCount, Dictionary** dictionary, char* word, int DictionaryIndex, FILE* CompressedFile_txt, char* str, int i)
+{
+    word[*WordNum] = '\0';
+    for (DictionaryIndex = 0; DictionaryIndex < DictionaryCount; (DictionaryIndex)++)
+    {
+        if (strcmp((*dictionary)[DictionaryIndex].DictionaryWord, word) == 0)
+        {
+            fprintf(CompressedFile_txt, "%s", (*dictionary)[DictionaryIndex].TranslationWord);
+            Marks(str, i, CompressedFile_txt);
+            break;
+        }
+        else
+            if (strcmp((*dictionary)[DictionaryIndex].TranslationWord, word) == 0)
+            {
+                fprintf(CompressedFile_txt, "%s", (*dictionary)[DictionaryIndex].DictionaryWord);
+                Marks(str, i, CompressedFile_txt);
+                break;
+            }
+    }
+    if (strcmp((*dictionary)[DictionaryIndex].TranslationWord, word) != 0 && strcmp((*dictionary)[DictionaryIndex].DictionaryWord, word) != 0)
+    {
+        fprintf(CompressedFile_txt, "%s", word);
+        Marks(str, i, CompressedFile_txt);
+    }
+    *WordNum = 0;
+}
+
 void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
 {
     FILE* CompressedFile_txt;
-    char* str, * word;
+    char* str;
+    char* word;
     str = (char*)calloc(4096, sizeof(char));
     word = (char*)calloc(1, sizeof(char));
-    int WordNum = 0, DictionaryIndex = 0;
+    int WordNum = 0;
+    int DictionaryIndex = 0;
     fopen_s(&CompressedFile_txt, "CompressedFile.txt", "w");
     if (CompressedFile_txt == NULL)
     {
@@ -173,7 +179,8 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
         {
             if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
             {
-                word[WordNum] = '\0';
+                add_dictionary(&WordNum, DictionaryCount, &dictionary, word, DictionaryIndex, CompressedFile_txt, str, i);
+                /*word[WordNum] = '\0';
                 for (DictionaryIndex = 0; DictionaryIndex < DictionaryCount; DictionaryIndex++)
                 {
                     if (strcmp(dictionary[DictionaryIndex].DictionaryWord, word) == 0)
@@ -195,7 +202,7 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
                     fprintf(CompressedFile_txt, "%s", word);
                     Marks(str, i, CompressedFile_txt);
                 }
-                WordNum = 0;
+                WordNum = 0;*/
             }
             else
             {
