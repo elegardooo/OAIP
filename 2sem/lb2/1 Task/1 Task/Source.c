@@ -101,21 +101,20 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
     Dictionary* dictionary = (Dictionary*)calloc(2048, sizeof(Dictionary));
     for (int i = 0; i < WordCount; i++)
     {
-            for (int j = 1; j < WordCount && word[i].Swapped != 1; j++)
+        for (int j = 1; j < WordCount && word[i].Swapped != 1; j++)
+        {
+            if ((word[j].Swapped != 1) && (word[i].size != 0 && word[i].count > 1 && (word[i].lettersnum + word[j].lettersnum) > ((word[i].size * word[j].count) + (word[j].size * word[i].count))))
             {
-                if ((word[j].Swapped != 1) && (word[i].size != 0 && word[i].count > 1 && (word[i].lettersnum + word[j].lettersnum) > ((word[i].size * word[j].count) + (word[j].size * word[i].count))))
-                    //if (word[i].size != 0 && word[i].count > 1 && (word[i].lettersnum + word[j].lettersnum) > ((word[i].size * word[j].count) + (word[j].size * word[i].count)))
-                    {
-                        int DictionaryIndex = *DictionaryCount;
-                        strcpy_s(dictionary[DictionaryIndex].DictionaryWord, WORD_MAX_LENGTH, word[i].wordName);
-                        strcpy_s(dictionary[DictionaryIndex].TranslationWord, WORD_MAX_LENGTH, word[j].wordName);
-                        *DictionaryCount = (*DictionaryCount) + 1;
-                        DictionaryIndex++;
-                        dictionary = (Dictionary*)realloc(dictionary, (DictionaryIndex + 2) * sizeof(Dictionary));
-                        word[i].Swapped = 1; word[j].Swapped = 1;
-                        break;
-                    }
+                int DictionaryIndex = *DictionaryCount;
+                strcpy_s(dictionary[DictionaryIndex].DictionaryWord, WORD_MAX_LENGTH, word[i].wordName);
+                strcpy_s(dictionary[DictionaryIndex].TranslationWord, WORD_MAX_LENGTH, word[j].wordName);
+                *DictionaryCount = (*DictionaryCount) + 1;
+                DictionaryIndex++;
+                dictionary = (Dictionary*)realloc(dictionary, (DictionaryIndex + 2) * sizeof(Dictionary));
+                word[i].Swapped = 1; word[j].Swapped = 1;
+                break;
             }
+        }
     }
     return dictionary;
 }
