@@ -5,9 +5,11 @@ int main()
     Words* word = (Words*)calloc(1, sizeof(Words)); 
     if (!word)
         exit(1);
+    word = NULL;
     Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
     if (!dictionary)
         exit(1);
+    dictionary = NULL;
     FILE* File_txt;
     FILE* Dictionary_txt;
     fopen_s(&File_txt, "File.txt", "r");
