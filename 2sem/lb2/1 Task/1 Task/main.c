@@ -7,7 +7,10 @@ int main()
         return 0;
     Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
     if (dictionary == NULL)
+    {
+        free(word);
         return 0;
+    }
     FILE* File_txt;
     FILE* Dictionary_txt;
     fopen_s(&File_txt, "File.txt", "r");
