@@ -117,7 +117,7 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
     {
         for (int j = 1; j < WordCount && word[i].Swapped != 1; j++)
         {
-            if ((word[j].Swapped != 1) && (word[i].size != 0 && word[i].count > 1 && (word[i].lettersnum + word[j].lettersnum) > ((word[i].size * word[j].count) + (word[j].size * word[i].count))))
+            if ((dictionary != NULL) && (word[j].Swapped != 1) && (word[i].size != 0 && word[i].count > 1 && (word[i].lettersnum + word[j].lettersnum) > ((word[i].size * word[j].count) + (word[j].size * word[i].count))))
             {
                 int DictionaryIndex = *DictionaryCount;
                 strcpy_s(dictionary[DictionaryIndex].DictionaryWord, WORD_MAX_LENGTH, word[i].wordName);

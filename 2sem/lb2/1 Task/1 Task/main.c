@@ -39,8 +39,6 @@ int main()
         if (dictionary == NULL)
             return NULL;
     }
-    if (dictionary == NULL)
-        return NULL;
     for (int i = 0; i < DictionaryCount; i++)
     {
         fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
