@@ -92,6 +92,7 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
         }
     }
     free(str);
+    free(word);
     return words;
 }
 
