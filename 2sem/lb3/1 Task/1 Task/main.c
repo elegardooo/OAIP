@@ -6,8 +6,8 @@ int main()
     FILE* File, *OutputFile;
     char FileName[256], empty = 0;
     printf("Enter the file name(including .bmp): ");
-    scanf("%s", &FileName);
-    File = fopen(FileName, "rb");
+    scanf_s("%s", &FileName);
+    fopen_s(&File, FileName, "rb");
     if (File == NULL)
     {
         perror("File open error.");
@@ -16,7 +16,7 @@ int main()
     BmpFile = read_bmp_file(File);
     fclose(File);
     filter_menu(BmpFile);
-    OutputFile = fopen("FiltredFile.bmp", "wb");
+    fopen_s(&OutputFile, "FiltredFile.bmp", "wb");
     fputs("BM", OutputFile);
     fwrite(&BmpFile.Header, sizeof(BmpFile.Header), 1, OutputFile);
     fwrite(BmpFile.Color, sizeof(short)/2, BmpFile.Header.imageSize, OutputFile);
