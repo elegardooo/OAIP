@@ -36,9 +36,12 @@ int main()
     dictionary = FillDictionary(word, WordCount, &DictionaryCount);
     if (dictionary == NULL)
         return NULL;
-    for (int i = 0; i < DictionaryCount; i++)
+    if(dictionary != NULL)
     {
-        fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
+        for (int i = 0; i < DictionaryCount; i++)
+        {
+            fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
+        }
     }
     fclose(File_txt);
     fopen_s(&File_txt, "File.txt", "r+");
@@ -47,7 +50,10 @@ int main()
         perror("File open error");
         exit(1);
     }
-    FileCompressor(File_txt, dictionary, DictionaryCount);
+    if(dictionary != NULL)
+    {
+        FileCompressor(File_txt, dictionary, DictionaryCount);
+    }
     fclose(File_txt);
     fclose(Dictionary_txt);
     printf("File compressed.");
