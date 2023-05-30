@@ -27,9 +27,6 @@ char* name_input(char** string)
     int length = 0;
     int c;
     (*string) = (char*)calloc(max_size, sizeof(char));
-    /*while ((--max_size > 0) && (((c = getchar()) != EOF) && (c != '\n')))
-        (*string)[length++] = c;
-    (*string)[length]= '\0';*/
     fgets((*string), max_size, stdin);
     length = strlen((*string));
     (*string)[length-1] = '\0';
@@ -72,7 +69,7 @@ void print_structure(computer* laptops, int array_size)
 
 void input_sort_choice(int* sort_choice)
 {
-    while (scanf_s("%d", *sort_choice) != 1 || sort_choice < 1 || sort_choice > 4 || getchar() != '\n')
+    while (scanf_s("%d", sort_choice) != 1 || *sort_choice < 1 || *sort_choice > 4 || getchar() != '\n')
     {
         printf("Wrong input. Try again.\n");
         while (getchar() != '\n');
@@ -163,22 +160,34 @@ void Memory_sort(computer* laptops, int array_size)
 void sorting(computer* laptops, int array_size)
 {
     int sort_choice = 0;
-    printf("\n1.Sort by Name.\n2.Sort by Matrix Frequency.\n3.Sort by RAM.\n4.Sort by Memory.\nChoose the type of sorting: ");
-    input_sort_choice(&sort_choice);
-    switch (sort_choice)
+    int exit = 0;
+    while (exit != 1)
     {
-    case 1:
-        name_sort(laptops, array_size);
-        break;
-    case 2:
-        Matrix_frequency_sort(laptops, array_size);
-        break;
-    case 3:
-        RAM_sort(laptops, array_size);
-        break;
-    case 4:
-        Memory_sort(laptops, array_size);
-        break;
+        printf("\n1.Sort by Name.\n2.Sort by Matrix Frequency.\n3.Sort by RAM.\n4.Sort by Memory.\nChoose the type of sorting: ");
+        input_sort_choice(&sort_choice);
+        switch (sort_choice)
+        {
+        case 1:
+            name_sort(laptops, array_size);
+            exit = 1;
+            break;
+        case 2:
+            Matrix_frequency_sort(laptops, array_size);
+            exit = 1;
+            break;
+        case 3:
+            RAM_sort(laptops, array_size);
+            exit = 1;
+            break;
+        case 4:
+            Memory_sort(laptops, array_size);
+            exit = 1;
+            break;
+        default:
+            printf("Wrong input. Try again.\n");
+            rewind(stdin);
+            break;
+        }
     }
     printf("\nStructure was sorted!\n");
 }
@@ -208,13 +217,9 @@ void deleting(computer** laptops, int* array_size)
         (*laptops)[i].Matrix_frequency = (*laptops)[i + 1].Matrix_frequency;
         (*laptops)[i].RAM = (*laptops)[i + 1].RAM;
         (*laptops)[i].Memory = (*laptops)[i + 1].Memory;
-        //(*laptops)[i] = (*laptops)[i + 1];
     }
-    //printf("\n%d", array_size);
     (*array_size) = (*array_size) - 1;
-   // printf("\n%s\n%s\n%s\n%d\n", laptops[0].name, laptops[1].name, laptops[2].name, array_size);
     *laptops = (computer*)realloc(*laptops, (*array_size)  * sizeof(computer));
-    //printf("\n%s\n%s\n", laptops[0].name, laptops[1].name);
 }
 
 int compare_Matrix(computer* laptops, int i)
@@ -301,11 +306,9 @@ void double_sort(computer* laptops, int array_size)
 void menu(computer* laptops, int array_size)
 {
     int choice = 0, exit = 0;
-    //create_structure(laptops, array_size);
     while (exit != 3)
     {
         printf("-------------------------------------------------\n1.Create structure.\n2.Print structure.\n3.Sort structure by 1 type.\n4.Sort structure by 2 types.\n5.Remove laptop.\n6.Exit.\nChoose the option: ");
-        //input_choice(choice);
         scanf_s("%d", &choice);
         switch (choice)
         {
@@ -371,9 +374,6 @@ int main()
 {
     int array_size=0;
     computer* laptops=NULL;
-    //printf("%d\n", array_size);
-    //print_structure(laptops, array_size);
-    //printf("%s", laptops[0].name);
     menu(laptops, array_size);
     return 0;
 }
