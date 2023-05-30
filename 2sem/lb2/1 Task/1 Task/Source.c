@@ -49,6 +49,34 @@ void Marks(char* str, int i, FILE* file)
     }
 }
 
+int str_end(char* str, int i)
+{
+    int k = 0;
+    switch (str[i])
+    {
+    case ' ':
+        return 1;
+        break;
+    case '\0':
+        return 1;
+        break;
+    case '\n':
+        return 1;
+        break;
+    case ',':
+        return 1;
+    case '.':
+        return 1;
+        break;
+    case ';':
+        return 1;
+        break;
+    case ':':
+        return 1;
+        break;
+    }
+    return k;
+}
 
 Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
 {
@@ -61,7 +89,7 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
     {
         for (int i = 0; i <= strlen(str); i++)
         {
-            if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
+            if (str_end(str, i) == 1)
             {
                 word[WordNum] = '\0';
                 WordNum = FindWordIndex(word, words, *WordCount);
