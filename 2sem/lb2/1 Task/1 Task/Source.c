@@ -52,6 +52,33 @@ void Marks(const char* str, int i, FILE* file)
     }
 }
 
+void add_words(int* WordNum, int *WordCount, Words* *words, char* word)
+{
+    word[*WordNum] = '\0';
+    //printf("%d\n", *WordNum);
+    *WordNum = FindWordIndex(word, *words, *WordCount);
+    if (*WordNum == -7)
+    {
+        int WordIndex = *WordCount;
+        //printf("%d", WordIndex);
+        strcpy_s((*words)[WordIndex].wordName, WORD_MAX_LENGTH, word);
+        (*words)[WordIndex].count = 1;
+        (*words)[WordIndex].size = strlen(word);
+        (*words)[WordIndex].Swapped = 0;
+        (*words)[WordIndex].lettersnum = strlen(word);
+        //printf("%d\n", words[WordIndex].lettersnum);
+        WordIndex = WordIndex + 1;
+        *WordCount = (*WordCount) + 1;
+        *words = (Words*)realloc(*words, (WordIndex + 1) * sizeof(Words));
+    }
+    else
+    {
+        (*words)[*WordNum].count = (*words)[*WordNum].count + 1;
+        (*words)[*WordNum].lettersnum += strlen(word);
+    }
+    *WordNum = 0;
+}
+
 Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
 {
     Words* words = (Words*)calloc(1, sizeof(Words));
@@ -67,14 +94,10 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
     {
         for (int i = 0; i <= strlen(str); i++)
         {
-            if (!(str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':'))
+            if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
             {
-                word[WordNum] = str[i];
-                word = (char*)realloc(word, (WordNum + 2) * sizeof(char));
-                WordNum++;
-            }
-            {
-                word[WordNum] = '\0';
+                add_words(&WordNum, WordCount, &words, word);
+                /*word[WordNum] = '\0';
                 WordNum = FindWordIndex(word, words, *WordCount);
                 if (WordNum == -7)
                 {
@@ -93,14 +116,14 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
                     words[WordNum].count = words[WordNum].count + 1;
                     words[WordNum].lettersnum += strlen(word);
                 }
-                WordNum = 0;
+                WordNum = 0;*/
             }
-            /*else
+            else
             {
                 word[WordNum] = str[i];
                 word = (char*)realloc(word, (WordNum + 2) * sizeof(char));
                 WordNum++;
-            }*/
+            }
         }
     }
     free(str);
