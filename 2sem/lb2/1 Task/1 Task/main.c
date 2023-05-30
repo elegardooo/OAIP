@@ -4,12 +4,11 @@ int main()
 {
     Words* word = (Words*)calloc(1, sizeof(Words)); 
     if (word == NULL)
-        return 0;
+        return NULL;
     Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
     if (dictionary == NULL)
     {
-        free(word);
-        return 0;
+        return NULL;
     }
     FILE* File_txt;
     FILE* Dictionary_txt;
@@ -29,11 +28,14 @@ int main()
     }
     word = Words_For_Dictionary(File_txt, &WordCount);
     if (word == NULL && dictionary == NULL)
-        return 0;
-    qsort(word, WordCount, sizeof(word[0]), compare);
+        return NULL;
+    if (word != NULL)
+    {
+        qsort(word, WordCount, sizeof(word[0]), compare);
+    }
     dictionary = FillDictionary(word, WordCount, &DictionaryCount);
     if (dictionary == NULL)
-        return 0;
+        return NULL;
     for (int i = 0; i < DictionaryCount; i++)
     {
         fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
