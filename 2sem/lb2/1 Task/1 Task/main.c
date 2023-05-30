@@ -24,8 +24,12 @@ int main()
         exit(1);
     }
     word = Words_For_Dictionary(File_txt, &WordCount);
+    if (!word)
+        exit(1);
     qsort(word, WordCount, sizeof(word[0]), compare);
     dictionary = FillDictionary(word, WordCount, &DictionaryCount);
+    if (!dictionary)
+        exit(1);
     for (int i = 0; i < DictionaryCount; i++)
     {
         fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);

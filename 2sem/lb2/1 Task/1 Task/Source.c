@@ -67,7 +67,12 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
     {
         for (int i = 0; i <= strlen(str); i++)
         {
-            if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
+            if (!(str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':'))
+            {
+                word[WordNum] = str[i];
+                word = (char*)realloc(word, (WordNum + 2) * sizeof(char));
+                WordNum++;
+            }
             {
                 word[WordNum] = '\0';
                 WordNum = FindWordIndex(word, words, *WordCount);
@@ -90,12 +95,12 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
                 }
                 WordNum = 0;
             }
-            else
+            /*else
             {
                 word[WordNum] = str[i];
                 word = (char*)realloc(word, (WordNum + 2) * sizeof(char));
                 WordNum++;
-            }
+            }*/
         }
     }
     free(str);
