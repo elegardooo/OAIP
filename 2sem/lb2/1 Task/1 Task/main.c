@@ -2,13 +2,14 @@
 
 int main()
 {
-    Words* word = (Words*)calloc(NULL, sizeof(Words)); 
+    Words* word = (Words*)calloc(1, sizeof(Words)); 
     if (!word)
         exit(1);
     Dictionary* dictionary = (Dictionary*)calloc(NULL, sizeof(Dictionary));
     if (!dictionary)
         exit(1);
-    FILE* File_txt, * Dictionary_txt;
+    FILE* File_txt;
+    FILE* Dictionary_txt;
     fopen_s(&File_txt, "File.txt", "r");
     fopen_s(&Dictionary_txt, "1Dictionary.txt", "w");
     int WordCount = 0;
