@@ -37,12 +37,9 @@ int main()
     {
         dictionary = FillDictionary(word, WordCount, &DictionaryCount);
     }
-    if(dictionary != NULL)
+    for (int i = 0; i < DictionaryCount; i++)
     {
-        for (int i = 0; i < DictionaryCount; i++)
-        {
-            fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
-        }
+        fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
     }
     fclose(File_txt);
     fopen_s(&File_txt, "File.txt", "r+");
