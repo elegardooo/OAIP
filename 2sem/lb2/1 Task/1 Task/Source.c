@@ -131,30 +131,30 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
     return dictionary;
 }
 
-void add_dictionary(int* WordNum, int DictionaryCount, Dictionary** dictionary, char* word, int DictionaryIndex, FILE* CompressedFile_txt, char* str, int i)
+void add_dictionary(Dictionary_Nums* Numbers, int DictionaryCount, Dictionary** dictionary, char* word, FILE* CompressedFile_txt, char* str, int i)
 {
-    word[*WordNum] = '\0';
-    for (DictionaryIndex = 0; DictionaryIndex < DictionaryCount; DictionaryIndex++)
+    word[(*Numbers).WordNum] = '\0';
+    for ((*Numbers).DictionaryIndex = 0; (*Numbers).DictionaryIndex < DictionaryCount; (*Numbers).DictionaryIndex++)
     {
-        if (strcmp((*dictionary)[DictionaryIndex].DictionaryWord, word) == 0)
+        if (strcmp((*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord, word) == 0)
         {
-            fprintf(CompressedFile_txt, "%s", (*dictionary)[DictionaryIndex].TranslationWord);
+            fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].TranslationWord);
             Marks(str, i, CompressedFile_txt);
             break;
         }
-        if (strcmp((*dictionary)[DictionaryIndex].TranslationWord, word) == 0)
+        if (strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) == 0)
         {
-            fprintf(CompressedFile_txt, "%s", (*dictionary)[DictionaryIndex].DictionaryWord);
+            fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord);
             Marks(str, i, CompressedFile_txt);
             break;
         }
     }
-    if (strcmp((*dictionary)[DictionaryIndex].TranslationWord, word) != 0 && strcmp((*dictionary)[DictionaryIndex].DictionaryWord, word) != 0)
+    if (strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) != 0 && strcmp((*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord, word) != 0)
     {
         fprintf(CompressedFile_txt, "%s", word);
         Marks(str, i, CompressedFile_txt);
     }
-    *WordNum = 0;
+    (*Numbers).WordNum = 0;
 }
 
 void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
@@ -164,8 +164,11 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
     char* word;
     str = (char*)calloc(4096, sizeof(char));
     word = (char*)calloc(1, sizeof(char));
-    int WordNum = 0;
-    int DictionaryIndex = 0;
+    Dictionary_Nums Numbers;
+    Numbers.DictionaryIndex = 0;
+    Numbers.WordNum = 0;
+    //int WordNum = 0;
+    //int DictionaryIndex = 0;
     fopen_s(&CompressedFile_txt, "CompressedFile.txt", "w");
     if (CompressedFile_txt == NULL)
     {
@@ -178,13 +181,14 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
         {
             if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
             {
-                add_dictionary(&WordNum, DictionaryCount, &dictionary, word, DictionaryIndex, CompressedFile_txt, str, i);
+                //add_dictionary(&(Numbers.WordNum), DictionaryCount, &dictionary, word, Numbers.DictionaryIndex, CompressedFile_txt, str, i);
+                add_dictionary(&Numbers, DictionaryCount, &dictionary, word, CompressedFile_txt, str, i);
             }
             else
             {
-                word[WordNum] = str[i];
-                word = (char*)realloc(word, (WordNum + 2) * sizeof(char));
-                WordNum++;
+                word[Numbers.WordNum] = str[i];
+                word = (char*)realloc(word, (Numbers.WordNum + 2) * sizeof(char));
+                Numbers.WordNum++;
             }
         }
         fprintf(CompressedFile_txt, "\n");

@@ -19,12 +19,19 @@ typedef struct Dictionary
     char TranslationWord[WORD_MAX_LENGTH];
 } Dictionary;
 
+typedef struct Dictionary_Nums
+{
+    int WordNum;
+    int DictionaryIndex;
+} Dictionary_Nums;
+
 int compare(const void* x1, const void* x2);
 int Is_Word(char letter);
 int FindWordIndex(char* name, Words* words, int n);
 void Marks(char* str, int i, FILE* file);
-void add_words(int WordNum, int* WordCount, Words* words, char* word);
+void add_words(int* WordNum, int* WordCount, Words** words, char* word);
 Words* Words_For_Dictionary(FILE* File_txt, int *WordCount);
 Dictionary* FillDictionary(Words* word, int WordCount, int *DictionaryCount);
+void add_dictionary(Dictionary_Nums* Numbers, int DictionaryCount, Dictionary** dictionary, char* word, FILE* CompressedFile_txt, char* str, int i);
 void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount);
 
