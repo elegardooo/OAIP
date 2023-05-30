@@ -64,7 +64,7 @@ void serialize_tree(Tree* Root, FILE* Output)
 Tree* create_node(Tree* Left, Tree* Right, char* str)
 {
     Tree* Node = (Tree*)malloc(sizeof(Tree));
-    strcpy(Node->Word, str);
+    strcpy_s(Node->Word, STR_MAX_VALUE, str);
     Node->Left = Left;
     Node->Right = Right;
     return Node;
@@ -83,7 +83,7 @@ void edit_tree(Tree* Root)
     trim_end(New_Question);
     Root->Left = create_node(NULL, NULL, Root->Word);
     Root->Right = create_node(NULL, NULL, New_Answer);
-    strcpy(Root->Word, New_Question);
+    strcpy_s(Root->Word, STR_MAX_VALUE, New_Question);
 }
 
 void akinator(Tree* Root)

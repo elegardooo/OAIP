@@ -2,7 +2,8 @@
 
 int main()
 {
-    FILE* Input = fopen("akinator.txt", "r");
+    FILE* Input;
+    fopen_s(&Input, "akinator.txt", "r");
     if (Input == NULL)
     {
         perror("File open error.");
@@ -11,7 +12,8 @@ int main()
     Tree* Root = deserialize_tree(Input);
     fclose(Input);
     akinator(Root);
-    FILE* Output = fopen("akinator.txt", "w");
+    FILE* Output;
+    fopen_s(&Output, "akinator.txt", "w");
     if (Output == NULL)
     {
         perror("File open error.");
