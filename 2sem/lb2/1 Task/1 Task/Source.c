@@ -15,7 +15,7 @@ int Is_Word(char letter)
     return 0;
 }
 
-int FindWordIndex(char* name, Words* words, int n)
+int FindWordIndex(const char* name, const Words* words, int n)
 {
     for (int i = 0; i < n; i++)
     {
@@ -25,7 +25,7 @@ int FindWordIndex(char* name, Words* words, int n)
     return -7;
 }
 
-void Marks(char* str, int i, FILE* file)
+void Marks(const char* str, int i, FILE* file)
 {
     switch (str[i])
     {
@@ -40,11 +40,14 @@ void Marks(char* str, int i, FILE* file)
         break;
     case '-':
         fprintf(file, "-");
+        break;
     case ':':
         fprintf(file, ":");
         break;
     case ';':
         fprintf(file, ";");
+        break;
+    default:
         break;
     }
 }
@@ -53,10 +56,10 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
 {
     Words* words = (Words*)calloc(1, sizeof(Words));
     if (!words)
-        return 1;
+        exit(1);
     char* word = (char*)calloc(1, sizeof(char));
     if (!word)
-        return 1;
+        exit(1);
     char* str;
     str = (char*)calloc(4096, sizeof(char));
     int WordNum = 0;

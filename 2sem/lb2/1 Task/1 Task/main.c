@@ -4,10 +4,10 @@ int main()
 {
     Words* word = (Words*)calloc(1, sizeof(Words)); 
     if (!word)
-        return 1;
+        exit(1);
     Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
     if (!dictionary)
-        return 1;
+        exit(1);
     FILE* File_txt, * Dictionary_txt;
     fopen_s(&File_txt, "File.txt", "r");
     fopen_s(&Dictionary_txt, "1Dictionary.txt", "w");
