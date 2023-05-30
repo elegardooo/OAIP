@@ -12,5 +12,5 @@ typedef struct Dictionary
 } Dictionary;
 
 void Marks(char* str, int i, FILE* file);
-Dictionary* Fill_Structure(FILE* Dictionary_txt, int& DictianoryCount);
+Dictionary* Fill_Structure(FILE* Dictionary_txt, int* DictianoryCount);
 void Decompressing(FILE* File_txt, Dictionary* dictionary, int DictionaryCount);

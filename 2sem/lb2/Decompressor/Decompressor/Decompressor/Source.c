@@ -24,7 +24,7 @@ void Marks(char* str, int i, FILE* file)
 	}
 }
 
-Dictionary* Fill_Structure(FILE* Dictionary_txt, int &DictianoryCount)
+Dictionary* Fill_Structure(FILE* Dictionary_txt, int *DictianoryCount)
 {
 	Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
 	int WordNum = 0;
@@ -38,14 +38,14 @@ Dictionary* Fill_Structure(FILE* Dictionary_txt, int &DictianoryCount)
 			if (str[i] == ' ')
 			{
 				word[WordNum] = '\0';
-				strcpy(dictionary[DictianoryCount].DictionaryWord, word);
+				strcpy(dictionary[*DictianoryCount].DictionaryWord, word);
 				WordNum = 0;
 			}
 			else
 				if (str[i] == '\0' || str[i] == '\n')
 				{
 					word[WordNum] = '\0';
-					strcpy(dictionary[DictianoryCount].TranslationWord, word);
+					strcpy(dictionary[*DictianoryCount].TranslationWord, word);
 					WordNum = 0;
 				}
 				else
@@ -55,8 +55,8 @@ Dictionary* Fill_Structure(FILE* Dictionary_txt, int &DictianoryCount)
 					WordNum++;
 				}
 		}
-		DictianoryCount++;
-		dictionary = (Dictionary*)realloc(dictionary, (DictianoryCount + 2) * sizeof(Dictionary));
+		(*DictianoryCount)++;
+		dictionary = (Dictionary*)realloc(dictionary, (*DictianoryCount + 2) * sizeof(Dictionary));
 	}
 	return dictionary;
 }
