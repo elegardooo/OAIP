@@ -41,6 +41,8 @@ int main()
     }
     for (int i = 0; i < DictionaryCount; i++)
     {
+        if ((dictionary[i].DictionaryWord == 0) && (dictionary[i].TranslationWord == 0))
+            return NULL;
         fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
     }
     fclose(File_txt);
