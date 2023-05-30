@@ -255,7 +255,8 @@ int database_searching(char* key, char** domain, char** ip)
 
 void add_in_database(const char* domain)
 {
-    FILE* database = fopen("database.txt", "r+");
+    FILE* database;
+    fopen_s(&database, "database.txt", "r+");
     if (database == NULL)
     {
         perror("File open error.");
