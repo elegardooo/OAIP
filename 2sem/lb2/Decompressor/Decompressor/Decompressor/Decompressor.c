@@ -11,8 +11,10 @@
 int main()
 {
 	Dictionary* dictionary;
-	FILE* File_txt = fopen("CompressedFile.txt", "r+");
-	FILE* Dictionary_txt = fopen("1Dictionary.txt", "r+");
+	FILE* File_txt;
+	fopen_s(&File_txt, "CompressedFile.txt", "r+");
+	FILE* Dictionary_txt;
+	fopen_s(&Dictionary_txt, "1Dictionary.txt", "r+");
 	if (File_txt == NULL)
 	{
 		perror("File open error");

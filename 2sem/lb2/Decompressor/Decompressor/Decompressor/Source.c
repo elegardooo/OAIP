@@ -38,14 +38,14 @@ Dictionary* Fill_Structure(FILE* Dictionary_txt, int *DictianoryCount)
 			if (str[i] == ' ')
 			{
 				word[WordNum] = '\0';
-				strcpy(dictionary[*DictianoryCount].DictionaryWord, word);
+				strcpy_s(dictionary[*DictianoryCount].DictionaryWord, WORD_MAX_LENGTH, word);
 				WordNum = 0;
 			}
 			else
 				if (str[i] == '\0' || str[i] == '\n')
 				{
 					word[WordNum] = '\0';
-					strcpy(dictionary[*DictianoryCount].TranslationWord, word);
+					strcpy_s(dictionary[*DictianoryCount].TranslationWord, WORD_MAX_LENGTH, word);
 					WordNum = 0;
 				}
 				else
@@ -67,7 +67,7 @@ void Decompressing(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
 	char* str = (char*)calloc(4096, sizeof(char));
 	char* word = (char*)calloc(1, sizeof(char));
 	int DictionaryIndex = 0, WordNum = 0;
-	DecompressedFile_txt = fopen("DecompressedFile.txt", "w");
+	fopen_s(&DecompressedFile_txt, "DecompressedFile.txt", "w");
 	while (fgets(str, 4096, File_txt) != NULL) 
 	{
 		for (int i = 0; i < (strlen(str)); i++) {
