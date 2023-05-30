@@ -78,7 +78,6 @@ void input_sort_choice(int* sort_choice)
 
 void create_structure(computer** laptops, int* array_size)
 {
-    //int array_size;
     printf("Input size of array: ");
     (*array_size) = input_nums();
     *laptops = struct_memory(*array_size);
