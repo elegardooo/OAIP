@@ -68,7 +68,7 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
                 if (WordNum == -7)
                 {
                     int WordIndex = *WordCount;
-                    strcpy(words[WordIndex].wordName, word);
+                    strcpy_s(words[WordIndex].wordName, WORD_MAX_LENGTH, word);
                     words[WordIndex].count = 1;
                     words[WordIndex].size = strlen(word);
                     words[WordIndex].Swapped = 0;
@@ -110,8 +110,8 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
                     if (word[i].size != 0 && word[i].count > 1 && (word[i].lettersnum + word[j].lettersnum) > ((word[i].size * word[j].count) + (word[j].size * word[i].count)))
                     {
                         int DictionaryIndex = *DictionaryCount;
-                        strcpy(dictionary[DictionaryIndex].DictionaryWord, word[i].wordName);
-                        strcpy(dictionary[DictionaryIndex].TranslationWord, word[j].wordName);
+                        strcpy_s(dictionary[DictionaryIndex].DictionaryWord, WORD_MAX_LENGTH, word[i].wordName);
+                        strcpy_s(dictionary[DictionaryIndex].TranslationWord, WORD_MAX_LENGTH, word[j].wordName);
                         *DictionaryCount = (*DictionaryCount) + 1;
                         DictionaryIndex++;
                         dictionary = (Dictionary*)realloc(dictionary, (DictionaryIndex + 2) * sizeof(Dictionary));
@@ -132,7 +132,12 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
     str = (char*)calloc(4096, sizeof(char));
     word = (char*)calloc(1, sizeof(char));
     int WordNum = 0, DictionaryIndex = 0;
-    CompressedFile_txt = fopen("CompressedFile.txt", "w");
+    fopen_s(&CompressedFile_txt, "CompressedFile.txt", "w");
+    if (CompressedFile_txt == NULL)
+    {
+        perror("File open error");
+        exit(1);
+    }
     while (fgets(str, 4096, File_txt) != NULL)
     {
         for (int i = 0; i < strlen(str); i++)

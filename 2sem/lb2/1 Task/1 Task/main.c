@@ -4,8 +4,8 @@ int main()
 {
     Words* word = (Words*)calloc(1, sizeof(Words)); Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
     FILE* File_txt, * Dictionary_txt;
-    File_txt = fopen("File.txt", "r");
-    Dictionary_txt = fopen("1Dictionary.txt", "w");
+    fopen_s(&File_txt, "File.txt", "r");
+    fopen_s(&Dictionary_txt, "1Dictionary.txt", "w");
     int WordCount = 0;
     int DictionaryCount = 0;
     if (File_txt == NULL)
@@ -26,7 +26,7 @@ int main()
         fprintf(Dictionary_txt, "%s %s\n", dictionary[i].DictionaryWord, dictionary[i].TranslationWord);
     }
     fclose(File_txt);
-    File_txt = fopen("File.txt", "r+");
+    fopen_s(&File_txt, "File.txt", "r+");
     if (File_txt == NULL)
     {
         perror("File open error");
