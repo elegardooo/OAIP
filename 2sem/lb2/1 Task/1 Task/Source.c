@@ -147,15 +147,12 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
                         Marks(str, i, CompressedFile_txt);
                         break;
                     }
-                    //else
-                    //{
-                        if (strcmp(dictionary[DictionaryIndex].TranslationWord, word) == 0)
-                        {
-                            fprintf(CompressedFile_txt, "%s", dictionary[DictionaryIndex].DictionaryWord);
-                            Marks(str, i, CompressedFile_txt);
-                            break;
-                        }
-                   // }
+                    if (strcmp(dictionary[DictionaryIndex].TranslationWord, word) == 0)
+                    {
+                        fprintf(CompressedFile_txt, "%s", dictionary[DictionaryIndex].DictionaryWord);
+                        Marks(str, i, CompressedFile_txt);
+                        break;
+                    }
                 }
                 if (strcmp(dictionary[DictionaryIndex].TranslationWord, word) != 0 && strcmp(dictionary[DictionaryIndex].DictionaryWord, word) != 0)
                 {
