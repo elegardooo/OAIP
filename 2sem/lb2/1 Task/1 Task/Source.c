@@ -111,6 +111,8 @@ Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
 Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
 {
     Dictionary* dictionary = (Dictionary*)calloc(2048, sizeof(Dictionary));
+    if (!dictionary)
+        exit(1);
     for (int i = 0; i < WordCount; i++)
     {
         for (int j = 1; j < WordCount && word[i].Swapped != 1; j++)
