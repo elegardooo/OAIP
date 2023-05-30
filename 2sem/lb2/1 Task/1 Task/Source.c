@@ -125,6 +125,8 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
                 *DictionaryCount = (*DictionaryCount) + 1;
                 DictionaryIndex++;
                 dictionary = (Dictionary*)realloc(dictionary, (DictionaryIndex + 2) * sizeof(Dictionary));
+                if (dictionary == NULL)
+                    exit(1);
                 word[i].Swapped = 1; word[j].Swapped = 1;
                 break;
             }
