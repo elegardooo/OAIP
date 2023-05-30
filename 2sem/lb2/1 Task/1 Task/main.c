@@ -46,7 +46,7 @@ int main()
     fclose(File_txt);
     fopen_s(&File_txt, "File.txt", "r+");
     if (File_txt == NULL)
-    {
+    { 
         perror("File open error");
         exit(1);
     }
