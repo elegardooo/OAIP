@@ -49,29 +49,6 @@ void Marks(char* str, int i, FILE* file)
     }
 }
 
-//int str_end(char* str, int i)
-//{
-//    int k = 0;
-//    switch (str[i])
-//    {
-//    case ' ':
-//        return 1;
-//    case '\0':
-//        return 1;
-//    case '\n':
-//        return 1;
-//    case ',':
-//        return 1;
-//    case '.':
-//        return 1;
-//    case ';':
-//        return 1;
-//    case ':':
-//        return 1;
-//    }
-//    return k;
-//}
-
 Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
 {
     Words* words = (Words*)calloc(1, sizeof(Words));
