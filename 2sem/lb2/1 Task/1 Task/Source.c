@@ -102,11 +102,9 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
     for (int i = 0; i < WordCount; i++)
     {
         if (word[i].Swapped != 1)
-
             for (int j = 1; j < WordCount; j++)
             {
                 if (word[j].Swapped != 1)
-
                     if (word[i].size != 0 && word[i].count > 1 && (word[i].lettersnum + word[j].lettersnum) > ((word[i].size * word[j].count) + (word[j].size * word[i].count)))
                     {
                         int DictionaryIndex = *DictionaryCount;
@@ -118,9 +116,7 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
                         word[i].Swapped = 1; word[j].Swapped = 1;
                         break;
                     }
-
             }
-
     }
     return dictionary;
 }
@@ -180,5 +176,6 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
         fprintf(CompressedFile_txt, "\n");
     }
     fclose(CompressedFile_txt);
+    free(word);
     free(str);
 }
