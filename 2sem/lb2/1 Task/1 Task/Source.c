@@ -52,7 +52,11 @@ void Marks(char* str, int i, FILE* file)
 Words* Words_For_Dictionary(FILE* File_txt, int* WordCount)
 {
     Words* words = (Words*)calloc(1, sizeof(Words));
+    if (!words)
+        return 1;
     char* word = (char*)calloc(1, sizeof(char));
+    if (!word)
+        return 1;
     char* str;
     str = (char*)calloc(4096, sizeof(char));
     int WordNum = 0;
