@@ -133,6 +133,7 @@ Dictionary* FillDictionary(Words* word, int WordCount, int* DictionaryCount)
 
 void add_dictionary(Dictionary_Nums* Numbers, int DictionaryCount, Dictionary** dictionary, char* word, FILE* CompressedFile_txt, char* str, int i)
 {
+    int k = 0;
     word[(*Numbers).WordNum] = '\0';
     for ((*Numbers).DictionaryIndex = 0; (*Numbers).DictionaryIndex < DictionaryCount; (*Numbers).DictionaryIndex++)
     {
@@ -140,15 +141,17 @@ void add_dictionary(Dictionary_Nums* Numbers, int DictionaryCount, Dictionary** 
         {
             fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].TranslationWord);
             Marks(str, i, CompressedFile_txt);
-            break;
+            k = 1;
         }
         else
-            if ((strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) == 0))
+            if (strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) == 0)
             {
                 fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord);
                 Marks(str, i, CompressedFile_txt);
-                break;
+                k = 1;
             }
+        if (k == 1)
+            break;
     }
     if (strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) != 0 && strcmp((*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord, word) != 0)
     {

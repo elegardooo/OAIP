@@ -2,11 +2,11 @@
 
 int main()
 {
-    Words* word = (Words*)calloc(1, sizeof(Words)); 
+    Words* word = (Words*)calloc(WORD_MAX_LENGTH, sizeof(Words)); 
     if (!word)
         exit(1);
     word = NULL;
-    Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
+    Dictionary* dictionary = (Dictionary*)calloc(WORD_MAX_LENGTH, sizeof(Dictionary));
     if (!dictionary)
         exit(1);
     dictionary = NULL;
