@@ -2,10 +2,10 @@
 
 int main()
 {
-    Words* word = (Words*)calloc(1, sizeof(Words)); 
+    Words* word = (Words*)calloc(NULL, sizeof(Words)); 
     if (!word)
         exit(1);
-    Dictionary* dictionary = (Dictionary*)calloc(1, sizeof(Dictionary));
+    Dictionary* dictionary = (Dictionary*)calloc(NULL, sizeof(Dictionary));
     if (!dictionary)
         exit(1);
     FILE* File_txt, * Dictionary_txt;
@@ -23,8 +23,7 @@ int main()
         perror("File open error");
         exit(1);
     }
-    word = Words_For_Dictionary(File_txt, &WordCount);
-    if (!word)
+    if(!(word = Words_For_Dictionary(File_txt, &WordCount)))
         exit(1);
     qsort(word, WordCount, sizeof(word[0]), compare);
     dictionary = FillDictionary(word, WordCount, &DictionaryCount);
