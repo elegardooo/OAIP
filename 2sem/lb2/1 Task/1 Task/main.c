@@ -33,7 +33,10 @@ int main()
     {
         qsort(word, WordCount, sizeof(word[0]), compare);
     }
-    dictionary = FillDictionary(word, WordCount, &DictionaryCount);
+    if (dictionary != NULL)
+    {
+        dictionary = FillDictionary(word, WordCount, &DictionaryCount);
+    }
     if (dictionary == NULL)
         return NULL;
     if(dictionary != NULL)
