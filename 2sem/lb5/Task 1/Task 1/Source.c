@@ -168,7 +168,7 @@ int check_ip_valid(char* ip)
     if (ip == NULL)
         return 0;
     int arr[MAX_IP_COMPONENTS];
-    int count = sscanf(ip, "%d.%d.%d.%d", &arr[0], &arr[1], &arr[2], &arr[3]);
+    int count = scanf_s(ip, "%d.%d.%d.%d", &arr[0], &arr[1], &arr[2], &arr[3]);
     if (count != MAX_IP_COMPONENTS)
         return 0;
     for (int i = 0; i < MAX_IP_COMPONENTS; i++)
