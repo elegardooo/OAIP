@@ -140,15 +140,15 @@ void add_dictionary(Dictionary_Nums* Numbers, int DictionaryCount, Dictionary** 
         {
             fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].TranslationWord);
             Marks(str, i, CompressedFile_txt);
-            goto breakout;
-        }
-        if (strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) == 0)
-        {
-            fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord);
-            Marks(str, i, CompressedFile_txt);
-            breakout:
             break;
         }
+        else
+            if ((strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) == 0))
+            {
+                fprintf(CompressedFile_txt, "%s", (*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord);
+                Marks(str, i, CompressedFile_txt);
+                break;
+            }
     }
     if (strcmp((*dictionary)[(*Numbers).DictionaryIndex].TranslationWord, word) != 0 && strcmp((*dictionary)[(*Numbers).DictionaryIndex].DictionaryWord, word) != 0)
     {
@@ -168,8 +168,6 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
     Dictionary_Nums Numbers;
     Numbers.DictionaryIndex = 0;
     Numbers.WordNum = 0;
-    //int WordNum = 0;
-    //int DictionaryIndex = 0;
     fopen_s(&CompressedFile_txt, "CompressedFile.txt", "w");
     if (CompressedFile_txt == NULL)
     {
@@ -182,7 +180,6 @@ void FileCompressor(FILE* File_txt, Dictionary* dictionary, int DictionaryCount)
         {
             if (str[i] == ' ' || str[i] == '\0' || str[i] == '\n' || str[i] == ',' || str[i] == '.' || str[i] == ';' || str[i] == ':')
             {
-                //add_dictionary(&(Numbers.WordNum), DictionaryCount, &dictionary, word, Numbers.DictionaryIndex, CompressedFile_txt, str, i);
                 add_dictionary(&Numbers, DictionaryCount, &dictionary, word, CompressedFile_txt, str, i);
             }
             else
